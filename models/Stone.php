@@ -42,10 +42,10 @@ class Stone extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'material' => 'Material',
-            'cut' => 'Cut',
-            'diameter' => 'Diamete',
-            'height' => 'Height',
+            'material' => 'Материал',
+            'cut' => 'Огранка',
+            'diameter' => 'Диаметр, мм',
+            'height' => 'Высота, мм',
         ];
     }
 }

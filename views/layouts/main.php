@@ -31,17 +31,10 @@ use yii\helpers\Html;
 
     <aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-gray-800" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto">
-        
+            <div class="w-full my-4">
+                <p class="text-white text-center font-bold">LOGO</p>
+            </div>
             <ul class="space-y-2 font-medium">
-                <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                            <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
-                            <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
-                        </svg>
-                        <span class="ms-3">Dashboard</span>
-                    </a>
-                </li>
                 <li>
                     <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
                         <!-- <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -52,84 +45,59 @@ use yii\helpers\Html;
                         <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-700 rounded-full">Pro</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                            <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Калькулятор 2</span>
-                        <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-700 rounded-full">Pro</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                            <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Калькулятор 3</span>
-                        <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-700 rounded-full">Pro</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"/>
-                        </svg>
+                        <svg aria-hidden="true" data-prefix="far" width="25"  height="25" data-icon="user-chart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-user-chart fa-w-20 fa-7x"><path fill="currentColor" d="M160 320c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zm0-144c26.47 0 48 21.53 48 48s-21.53 48-48 48-48-21.53-48-48 21.53-48 48-48zm66.79 166.02c-9.9 0-19.89 1.45-29.58 4.39-11.79 3.58-24.24 5.6-37.21 5.6s-25.42-2.01-37.21-5.6c-9.68-2.94-19.67-4.39-29.58-4.39-30.23 0-59.65 13.48-76.9 39.11C6.01 396.42 0 414.84 0 434.67V472c0 22.09 17.91 40 40 40h240c22.09 0 40-17.91 40-40v-37.33c0-19.83-6.01-38.25-16.31-53.54-17.25-25.63-46.66-39.11-76.9-39.11zM272 464H48v-29.33c0-9.6 2.81-18.84 8.12-26.74 7.55-11.21 21.41-17.91 37.08-17.91 5.31 0 10.57.78 15.63 2.31C125.59 397.42 142.8 400 160 400s34.41-2.58 51.16-7.67a53.633 53.633 0 0 1 15.63-2.31c15.67 0 29.53 6.7 37.08 17.91 5.31 7.9 8.12 17.14 8.12 26.74V464zM592 0H208c-26.47 0-48 22.25-48 49.59V96c6.44 0 11.4.62 15.8 1.59 5.42.67 10.74 1.52 15.93 2.85 4.17.98 8.17 2.35 12.16 3.78 1.34.49 2.79.74 4.12 1.28V48h384v320h-240v48h240c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0zM416.97 256.97l72-72 24.3 24.3c11.34 11.34 30.73 3.31 30.73-12.73V108c0-6.63-5.37-12-12-12h-88.54c-16.04 0-24.07 19.39-12.73 30.73l24.3 24.3L400 206.06l-55.03-55.03c-9.37-9.37-24.57-9.37-33.94 0l-30.73 30.73c4.67 13.29 7.7 27.35 7.7 42.23 0 6.83-.98 13.4-2.01 19.95l42.01-42 55.03 55.03c9.37 9.37 24.57 9.37 33.94 0z" class="flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white"></path></svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Просмотр расчётов</span>
-                        <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-                        </svg>
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-book-open"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Справочник металлов</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Курсы валют</span>
+                    <a href="<?= yii\helpers\Url::to(['work/index']) ?>" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-pie"></i>
+                        <span class="ms-3">База расчётов</span>
                     </a>
+                    
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                            <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"/>
-                        </svg>
+                    <a href="<?= yii\helpers\Url::to(['currency-rate/index']) ?>" 
+                     class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'currency-rate' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-column"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Курсы валют</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="<?= yii\helpers\Url::to(['metal-rate/index']) ?>" 
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal-rate' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-line"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Курсы металлов</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 16">
-                            <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                        </svg>
-                        <span class="ms-3">База расчётов</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['stone/index']) ?>" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 16">
-                            <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                        </svg>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['stone/index']) ?>" 
+                        class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'stone' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-gem"></i>
                         <span class="ms-3">Справочник камней</span>
                     </a>
+                    
                 </li>
                 
+                
                 <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 16">
-                            <path d="M16 14V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 0 0 0-2h-1v-2a2 2 0 0 0 2-2ZM4 2h2v12H4V2Zm8 16H3a1 1 0 0 1 0-2h9v2Z"/>
-                        </svg>
+                    <a href="<?= yii\helpers\Url::to(['work/index']) ?>" 
+                        class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'work' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-file"></i>
                         <span class="ms-3">Справочник работ</span>
                     </a>
                 </li>
@@ -147,7 +115,7 @@ use yii\helpers\Html;
     </aside>
 
     <div class="sm:ml-[250px] ">
-        <div class="container mx-auto">
+        <div>
             <?= $content ?>
 
         </div>
