@@ -53,19 +53,21 @@ use yii\helpers\Html;
                     </a>
                 </li>
 
-                <li>
-                    <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
-                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-book-open"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Справочник металлов</span>
-                    </a>
-                </li>
-
+                
                 <li>
                     <a href="<?= yii\helpers\Url::to(['work/index']) ?>" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
                         <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-pie"></i>
                         <span class="ms-3">База расчётов</span>
                     </a>
                     
+                </li>
+
+                <li>
+                    <a href="<?= yii\helpers\Url::to(['metal/index']) ?>" 
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-book-open"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Справочник металлов</span>
+                    </a>
                 </li>
 
                 <li>

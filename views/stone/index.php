@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
             'columns' => [
-                ['class' => 'yii\grid\SerialColumn', 
+                [
+                    'class' => 'yii\grid\SerialColumn', 
+                    'header' => '№',
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],
@@ -35,15 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
 
-                [
-                    'attribute' => 'id',
-                    'headerOptions' => [
-                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
-                    ],
-                    'contentOptions' => [
-                        'class' => 'px-4 py-2 text-center text-gray-800'
-                    ],
-                ],
                 [
                     'attribute' => 'material',
                     'headerOptions' => [

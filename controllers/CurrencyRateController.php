@@ -45,38 +45,39 @@ class CurrencyRateController extends Controller
      */
     public function actionIndex()
     {
+        $today = date('Y-m-d');
 
+        // Check if the data has already been updated today
+        $lastUpdate = Yii::$app->cache->get('currency_last_update');
+
+        if ($lastUpdate != $today) {
+            // Update data for the last 10 days
+            for ($i = 0; $i < 10; $i++) {
+                $date = date('Y-m-d', strtotime("-$i days"));
+                $model = CurrencyRate::findOne(['date' => $date]);
+                if (!$model) {
+                    $this->fetchAndStoreCurrencyRates($date);
+                }                
+            }
+
+            // Delete data older than 10 days
+            $deleteDate = date('Y-m-d', strtotime('-9 days'));
+            CurrencyRate::deleteAll(['<', 'date', $deleteDate]);
+
+            // Store today's date as the last update date
+            Yii::$app->cache->set('currency_last_update', $today);
+        }
+
+        // Prepare the data provider for the grid view
         $searchModel = new CurrencyRateSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $this->fetchAndStoreCurrencyRates('08.11.2024');
-        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-
-
-        
-
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => CurrencyRate::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
-        // ]);
-
-        // return $this->render('index', [
-        //     'dataProvider' => $dataProvider,
-        // ]);
     }
+
 
     /**
      * Displays a single CurrencyRate model.
@@ -175,7 +176,8 @@ class CurrencyRateController extends Controller
      */
     protected function fetchAndStoreCurrencyRates($date)
     {
-        $url = "https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=" . urlencode($date);
+
+        $url = "https://www.cbr.ru/currency_base/daily/?UniDbQuery.Posted=True&UniDbQuery.To=" . urlencode(date('d.m.Y', strtotime($date)));
         $client = new Client();
 
         try {
@@ -186,7 +188,7 @@ class CurrencyRateController extends Controller
             return;
         }
 
-        $this->parseAndStoreCurrencyRates($html);
+        $this->parseAndStoreCurrencyRates($html,$date);
     }
 
     /**
@@ -195,15 +197,16 @@ class CurrencyRateController extends Controller
      * @param string $html
      * @return void
      */
-    protected function parseAndStoreCurrencyRates($html)
+    protected function parseAndStoreCurrencyRates($html, $date)
     {
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
         $xpath = new DOMXPath($dom);
+     
     
         // XPath to select rows of the currency table
         $rows = $xpath->query("//table[@class='data']//tr");
-    
+        
         foreach ($rows as $index => $row) {
             // Skip the header row
             if ($index === 0) {
@@ -211,13 +214,13 @@ class CurrencyRateController extends Controller
             }
     
             $columns = $xpath->query('.//td', $row);
-    
+           
             // Extract data from each column
             $currencyName = $columns->item(1)->nodeValue ?? null;
             $rate = str_replace(',', '.', $columns->item(4)->nodeValue ?? null);
-    
+
             if ($currencyName && $rate) {
-                $this->storeOrUpdateCurrencyRate(date('Y-m-d'), $currencyName, $rate);
+                $this->storeOrUpdateCurrencyRate($date, $currencyName, $rate);
             }
         }
     }
@@ -232,30 +235,30 @@ class CurrencyRateController extends Controller
      * @return void
      */
     protected function storeOrUpdateCurrencyRate($date, $currency, $rate)
-{
-    // Check if the record already exists
-    $model = CurrencyRate::findOne(['date' => $date, 'currency' => $currency]);
+    {
+        // Check if the record already exists
+        $model = CurrencyRate::findOne(['date' => $date, 'currency' => $currency]);
 
-    if ($model) {
-        // Update the existing record
-        $model->rate = $rate;
-        if (!$model->update()) {
-            Yii::error("Failed to update: $currency - $rate");
+        if ($model) {
+            // Update the existing record
+            $model->rate = $rate;
+            if (!$model->update()) {
+                Yii::error("Failed to update: $currency - $rate");
+            } else {
+                Yii::info("Updated: $currency - $rate");
+            }
         } else {
-            Yii::info("Updated: $currency - $rate");
-        }
-    } else {
-        // Create a new record
-        $model = new CurrencyRate();
-        $model->date = $date;
-        $model->currency = $currency;
-        $model->rate = $rate;
-        if (!$model->save()) {
-            Yii::error("Failed to store: $currency - $rate");
-        } else {
-            Yii::info("Stored: $currency - $rate");
+            // Create a new record
+            $model = new CurrencyRate();
+            $model->date = $date;
+            $model->currency = $currency;
+            $model->rate = $rate;
+            if (!$model->save()) {
+                Yii::error("Failed to store: $currency - $rate");
+            } else {
+                Yii::info("Stored: $currency - $rate");
+            }
         }
     }
-}
 
 }

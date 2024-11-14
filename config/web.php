@@ -26,6 +26,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'xXNr3kKvbQznn52OIxv6xYOVOASH67oS',
+            'baseUrl' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -53,14 +54,27 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        // url manager ***************************************************************************************************
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'metal' => 'metal/index',
+
+                'currency-rate' => 'currency-rate/index',
+
+                'metal-rate' => 'metal-rate/index',
+
+                'stone' => 'stone/index',
+
+                'work' => 'work/index',
+                'currency-rate/<page:\d+>/<per-page:\d+>' => 'currency-rate/index',
+                'work/<id:\d+>' => 'work/view',
             ],
         ],
-        */
+        // url manager ***************************************************************************************************
+
+        
     ],
     'params' => $params,
 ];
