@@ -10,19 +10,19 @@ use yii\widgets\LinkPager;
 /** @var app\models\CurrencyRateSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Курсы валют за 10 дней';
+$this->title = 'Курсы валют за 30 дней';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="currency-rate-index p-6 bg-gray-50">
+<div class="p-6 currency-rate-index bg-gray-50">
 
     <h1 class="text-2xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
 
     <!-- Search Form -->
-    <div class="mt-4 bg-white p-6 rounded-lg shadow-md">
+    <div class="p-6 mt-4 bg-white rounded-lg shadow-md">
         <?php $form = ActiveForm::begin(['method' => 'get']); ?>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
             <!-- Currency Input -->
             <?= $form->field($searchModel, 'currency')->dropDownList(
                 CurrencyRateSearch::getCurrencyOptions(), // Fetch options from the search model
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <!-- GridView -->
-    <div class="overflow-x-auto mt-6">
+    <div class="mt-6 overflow-x-auto">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'px-4 py-2 text-center text-gray-800'],
                 ],
             ],
-            'summary' => '<div class="text-gray-600 text-sm px-6 py-4">Показаны {begin}-{end} из {totalCount} элементов</div>',
+            'summary' => '<div class="px-6 py-4 text-sm text-gray-600">Показаны {begin}-{end} из {totalCount} элементов</div>',
             'pager' => [
                 'options' => ['class' => 'flex justify-center py-4'],
                 'linkOptions' => ['class' => 'mx-1 px-3 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100'],

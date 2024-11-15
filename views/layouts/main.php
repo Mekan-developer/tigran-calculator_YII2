@@ -42,7 +42,7 @@ $this->registerJs("
 ", \yii\web\View::POS_READY); // Ensures jQuery is ready before running the script
 ?>
 
-    <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-400 rounded-lg sm:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+    <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 text-sm text-gray-400 rounded-lg ms-3 sm:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
         <span class="sr-only">Open sidebar</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
@@ -56,7 +56,7 @@ $this->registerJs("
     aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto">
             <div class="w-full my-4">
-                <p class="text-white text-center font-bold">LOGO</p>
+                <p class="font-bold text-center text-white">LOGO</p>
             </div>
             <ul class="space-y-2 font-medium">
                 <li>
@@ -77,17 +77,10 @@ $this->registerJs("
                     
                 </li>
 
+                
                 <li>
-                    <a href="<?= yii\helpers\Url::to(['metal/index']) ?>" 
-                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal' ? 'bg-gray-700' : '' ?>">
-                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-book-open"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Справочник металлов</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="<?= yii\helpers\Url::to(['currency-rate/index']) ?>" 
-                     class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'currency-rate' ? 'bg-gray-700' : '' ?>">
+                        <a href="<?= yii\helpers\Url::to(['currency-rate/index']) ?>" 
+                        class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'currency-rate' ? 'bg-gray-700' : '' ?>">
                         <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-column"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Курсы валют</span>
                     </a>
@@ -95,9 +88,17 @@ $this->registerJs("
                 
                 <li>
                     <a href="<?= yii\helpers\Url::to(['metal-rate/index']) ?>" 
-                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal-rate' ? 'bg-gray-700' : '' ?>">
+                        class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal-rate' ? 'bg-gray-700' : '' ?>">
                         <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-line"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Курсы металлов</span>
+                    </a>
+                </li>
+        
+                <li>
+                    <a href="<?= yii\helpers\Url::to(['metal/index']) ?>" 
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'metal' ? 'bg-gray-700' : '' ?>">
+                        <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-book-open"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Справочник металлов</span>
                     </a>
                 </li>
 
