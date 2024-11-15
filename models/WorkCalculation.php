@@ -27,12 +27,15 @@ class WorkCalculation extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+
     public function rules()
     {
         return [
+            
             [['client_id', 'work_type', 'cost'], 'required'],
             [['client_id'], 'integer'],
-            [['cost'], 'number'],
+            [['cost'], 'number', 'min' => 0, 'tooSmall' => 'Cost must be a positive number.'],
             [['work_type'], 'string', 'max' => 255],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientData::class, 'targetAttribute' => ['client_id' => 'id']],
         ];

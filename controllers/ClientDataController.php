@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\ClientData;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -75,22 +76,35 @@ class ClientDataController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new ClientData();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+     public function actionCreate()
+     {
+         $model = new ClientData();
+ 
+         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             return $this->redirect(['metal-calculation/create', 'client_id' => $model->id]);
+         }
+ 
+         return $this->render('create', [
+             'model' => $model,
+         ]);
+     }
+    // public function actionCreate()
+    // {
+    //     $model = new ClientData();
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    //     if ($this->request->isPost) {
+    //         if ($model->load($this->request->post()) && $model->save()) {
+    //             return $this->redirect(['view', 'id' => $model->id]);
+    //         }
+    //     } else {
+    //         $model->loadDefaultValues();
+    //     }
+
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Updates an existing ClientData model.

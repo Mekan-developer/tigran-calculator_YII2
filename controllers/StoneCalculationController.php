@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\StoneCalculation;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -75,22 +76,36 @@ class StoneCalculationController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new StoneCalculation();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+     public function actionCreate($client_id)
+     {
+         $model = new StoneCalculation();
+         $model->client_id = $client_id;
+ 
+         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+             return $this->redirect(['work-calculation/create', 'client_id' => $client_id]);
+         }
+ 
+         return $this->render('create', [
+             'model' => $model,
+         ]);
+     }
+    // public function actionCreate()
+    // {
+    //     $model = new StoneCalculation();
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    //     if ($this->request->isPost) {
+    //         if ($model->load($this->request->post()) && $model->save()) {
+    //             return $this->redirect(['view', 'id' => $model->id]);
+    //         }
+    //     } else {
+    //         $model->loadDefaultValues();
+    //     }
+
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Updates an existing StoneCalculation model.

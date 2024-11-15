@@ -50,14 +50,13 @@ class CurrencyRateController extends Controller
         // Check if the data has already been updated today
         $lastUpdate = Yii::$app->cache->get('currency_last_update');
      
-        if ($lastUpdate != $today) {
+        if (true) {
             $day = 30;
             // Update data for the last 10 days
             for ($i = 0; $i < $day; $i++) {
                 $date = date('Y-m-d', strtotime("-$i days"));
                 $model = CurrencyRate::findOne(['date' => $date]);
                 if (!$model) {
-
                     $this->fetchAndStoreCurrencyRates($date);
                 }                
             }
@@ -204,8 +203,7 @@ class CurrencyRateController extends Controller
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
         $xpath = new DOMXPath($dom);
-     
-    
+
         // XPath to select rows of the currency table
         $rows = $xpath->query("//table[@class='data']//tr");
         
@@ -214,18 +212,22 @@ class CurrencyRateController extends Controller
             if ($index === 0) {
                 continue;
             }
-    
-            $columns = $xpath->query('.//td', $row);
-           
-            // Extract data from each column
-            $currencyName = $columns->item(1)->nodeValue ?? null;
-            $rate = str_replace(',', '.', $columns->item(4)->nodeValue ?? null);
 
-            if ($currencyName && $rate) {
-                $this->storeOrUpdateCurrencyRate($date, $currencyName, $rate);
+            $columns = $xpath->query('.//td', $row);
+            
+            // Extract data from each column
+            $currencyName = trim($columns->item(1)->nodeValue ?? '');
+            $rate = str_replace(',', '.', trim($columns->item(4)->nodeValue ?? ''));
+
+            // Process only USD and EUR
+            if (in_array($currencyName, ['USD', 'EUR'])) {
+                if ($currencyName && $rate) {
+                    $this->storeOrUpdateCurrencyRate($date, $currencyName, $rate);
+                }
             }
         }
     }
+
     
 
     /**

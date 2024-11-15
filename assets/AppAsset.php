@@ -23,6 +23,11 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'https://code.jquery.com/jquery-3.6.0.min.js',
+        'https://cdn.jsdelivr.net/npm/flowbite@1.4.2/dist/flowbite.min.js', // Flowbite JS after jQuery
+        'js/site.js',
+        // 'https://code.jquery.com/jquery-3.6.0.min.js', // Add jQuery from CDN
+        // 'js/site.js', // Your custom JS file
     ];
     public $depends = [
         'yii\web\YiiAsset',
