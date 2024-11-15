@@ -56,7 +56,7 @@ class CurrencyRateSearch extends CurrencyRate
      */
     public function search($params)
     {
-        $query = CurrencyRate::find();
+        $query = CurrencyRate::find()->orderBy(['date' => SORT_ASC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -49,19 +49,21 @@ class CurrencyRateController extends Controller
 
         // Check if the data has already been updated today
         $lastUpdate = Yii::$app->cache->get('currency_last_update');
-
+     
         if ($lastUpdate != $today) {
+            $day = 30;
             // Update data for the last 10 days
-            for ($i = 0; $i < 10; $i++) {
+            for ($i = 0; $i < $day; $i++) {
                 $date = date('Y-m-d', strtotime("-$i days"));
                 $model = CurrencyRate::findOne(['date' => $date]);
                 if (!$model) {
+
                     $this->fetchAndStoreCurrencyRates($date);
                 }                
             }
 
             // Delete data older than 10 days
-            $deleteDate = date('Y-m-d', strtotime('-9 days'));
+            $deleteDate = date('Y-m-d', strtotime(-1*($day-1) . " days"));
             CurrencyRate::deleteAll(['<', 'date', $deleteDate]);
 
             // Store today's date as the last update date
