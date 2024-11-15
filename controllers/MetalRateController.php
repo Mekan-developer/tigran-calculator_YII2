@@ -42,30 +42,30 @@ class MetalRateController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => MetalRate::find(),
-
-        ]);
 
         $date_today = date('d.m.Y');
         // Check if the data has already been updated today
         $lastUpdatedMetalDate = Yii::$app->cache->get('currency_last_updated_metal_date');
-        if (true) {
+        if ($lastUpdatedMetalDate != $date_today) {
+            MetalRate::deleteAll();
             $day = 30;
-
+            
             $date_last_30 = date('d.m.Y', strtotime("-$day days"));
             $url = "https://www.cbr.ru/hd_base/metall/metall_base_new/?UniDbQuery.Posted=True&UniDbQuery.From=$date_last_30&UniDbQuery.To=$date_today&UniDbQuery.Gold=true&UniDbQuery.Silver=true&UniDbQuery.Platinum=true&UniDbQuery.Palladium=true&UniDbQuery.so=1";
             $this->fetchAndStoreMetalRates($url);
-             
-  
-            MetalRate::deleteAll();
 
+            
+            // Delete data older than 10 days
+            $deleteDate = date('Y-m-d', strtotime(-1*($day-1) . " days"));
+            MetalRate::deleteAll(['<', 'date', $deleteDate]);
             // Store today's date as the last update date
             Yii::$app->cache->set('currency_last_updated_metal_date', $date_today);
         }
+         
+        $dataProvider = new ActiveDataProvider([
+            'query' => MetalRate::find(),
 
-
-        
+        ]);
         
 
         return $this->render('index', [
@@ -186,7 +186,6 @@ class MetalRateController extends Controller
 
         // XPath to select rows of the metal rates table
         $rows = $xpath->query("//table[@class='data']//tr");
-     
 
         foreach ($rows as $index => $row) {
             // Skip the header row
@@ -195,13 +194,19 @@ class MetalRateController extends Controller
             }
 
             $columns = $xpath->query('.//td', $row);
-            
-            // Extract data from each column
+
+            // Ensure there are enough columns
+            if ($columns->length < 5) {
+                Yii::warning("Skipping row $index due to insufficient columns.");
+                continue;
+            }
+
+            // Extract data from each column and sanitize the values
             $date = $columns->item(0)->nodeValue ?? null;
-            $gold = str_replace(',', '.', $columns->item(1)->nodeValue ?? null);
-            $silver = str_replace(',', '.', $columns->item(2)->nodeValue ?? null);
-            $platinum = str_replace(',', '.', $columns->item(3)->nodeValue ?? null);
-            $palladium = str_replace(',', '.', $columns->item(4)->nodeValue ?? null);
+            $gold = $this->sanitizeRate($columns->item(1)->nodeValue ?? null);
+            $silver = $this->sanitizeRate($columns->item(2)->nodeValue ?? null);
+            $platinum = $this->sanitizeRate($columns->item(3)->nodeValue ?? null);
+            $palladium = $this->sanitizeRate($columns->item(4)->nodeValue ?? null);
 
             // Convert date to Y-m-d format
             $date = date('Y-m-d', strtotime($date));
@@ -214,9 +219,19 @@ class MetalRateController extends Controller
         }
     }
 
+    protected function sanitizeRate($rate)
+    {
+        // Remove spaces and replace commas with dots
+        $rate = str_replace([' ', ','], ['', '.'], $rate);
+
+        // Ensure the value is numeric
+        return is_numeric($rate) ? (float) $rate : null;
+    }
+
+    
+
     protected function storeMetalRate($date, $metal, $rate)
     {
-       
         // Skip if rate is null or empty
         if (empty($rate)) {
             return;
@@ -226,26 +241,26 @@ class MetalRateController extends Controller
         $model = MetalRate::findOne(['date' => $date, 'metal' => $metal]);
 
         if ($model) {
-            $model->rate = (float)$rate;
+            $model->rate = $rate;
 
             if (!$model->update()) {
-                Yii::error("Failed to update: $metal on $date with rate $rate");
+                Yii::error("Failed to update: $metal on $date with rate $rate. Errors: " . json_encode($model->errors));
             } else {
                 Yii::info("Updated: $metal on $date with rate $rate");
             }
         } else {
             $model = new MetalRate();
-            $model->date = '2024-11-15'; // Example date
-            $model->metal = 'Gold';      // Example metal
-            $model->rate = 1234.56;      // Example rate (numeric)
-            
+            $model->date = $date;
+            $model->metal = $metal;
+            $model->rate = $rate;
+
             if (!$model->save()) {
-                var_dump($model->errors);
+                Yii::error("Failed to save: $metal on $date with rate $rate. Errors: " . json_encode($model->errors));
             } else {
-                echo 'Saved successfully!';
+                Yii::info("Saved successfully: $metal on $date with rate $rate");
             }
-            
         }
     }
+
 
 }

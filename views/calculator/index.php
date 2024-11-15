@@ -14,17 +14,17 @@ $this->title = 'Калькулятор стоимости изделия';
 
 <div class="flex gap-4 p-4 ">
 <?php for( $i=1; $i<=3;$i++){ ?>
-    <div class="flex-1 flex flex-row gap-4 justify-around" id="dynamic-pages-container">
-        <div class="calculation-form bg-gray-50 p-4 rounded-sm shadow-lg flex-1">
+    <div class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container">
+        <div class="flex-1 p-4 rounded-sm shadow-lg calculation-form bg-gray-50">
 
-            <h1 class="text-xl font-semibold text-gray-800 mb-1"><?= Html::encode($this->title) ?></h1>
+            <h1 class="mb-1 text-xl font-semibold text-gray-800"><?= Html::encode($this->title) ?></h1>
            
 
                 <?php $form = ActiveForm::begin(); ?>
 
                 <!-- ДАННЫЕ КЛИЕНТА -->
-                <div class="bg-blue-100 p-4 rounded-sm mb-4">
-                    <h2 class="text-md font-semibold text-blue-800 mb-1">ДАННЫЕ КЛИЕНТА</h2>
+                <div class="p-4 mb-4 bg-blue-100 rounded-sm">
+                    <h2 class="mb-1 font-semibold text-blue-800 text-md">ДАННЫЕ КЛИЕНТА</h2>
                     <?= $form->field($clientModel, 'fio')->textInput(['maxlength' => true, 'class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-blue-500 focus:border-blue-500'])->label('ФИО') ?>
                     <?= $form->field($clientModel, 'phone')->textInput(['maxlength' => true, 'class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-blue-500 focus:border-blue-500'])->label('Телефон') ?>
                     <?= $form->field($clientModel, 'product_type')->textInput(['maxlength' => true, 'class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-blue-500 focus:border-blue-500'])->label('Тип изделия') ?>
@@ -33,8 +33,8 @@ $this->title = 'Калькулятор стоимости изделия';
                 </div>
 
                 <!-- МЕТАЛЛ -->
-                <div class="bg-pink-100 p-4 rounded-sm mb-4">
-                    <h2 class="text-md font-semibold text-pink-800 mb-1">МЕТАЛЛ</h2>
+                <div class="p-4 mb-4 bg-pink-100 rounded-sm">
+                    <h2 class="mb-1 font-semibold text-pink-800 text-md">МЕТАЛЛ</h2>
                     <?= $form->field($metalModel, 'profile')->textInput(['maxlength' => true, 'class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-pink-500 focus:border-pink-500'])->label('Профиль') ?>
                     <?= $form->field($metalModel, 'height')->textInput(['class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-pink-500 focus:border-pink-500'])->label('Высота') ?>
                     <?= $form->field($metalModel, 'width')->textInput(['class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-pink-500 focus:border-pink-500'])->label('Ширина') ?>
@@ -44,8 +44,8 @@ $this->title = 'Калькулятор стоимости изделия';
                 </div>
 
                 <!-- КАМНИ -->
-                <div class="bg-yellow-100 p-4 rounded-sm mb-4">
-                    <h2 class="text-md font-semibold text-yellow-800 mb-1">КАМНИ</h2>
+                <div class="p-4 mb-4 bg-yellow-100 rounded-sm">
+                    <h2 class="mb-1 font-semibold text-yellow-800 text-md">КАМНИ</h2>
                     <?= $form->field($stoneModel, 'stone')->textInput(['maxlength' => true, 'class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500'])->label('Камень') ?>
                     <?= $form->field($stoneModel, 'cost_per_unit')->textInput(['class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500'])->label('Стоимость за 1 шт') ?>
                     <?= $form->field($stoneModel, 'max_possible')->textInput(['class' => 'block w-full  text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500'])->label('Возможный максимум') ?>
@@ -55,17 +55,17 @@ $this->title = 'Калькулятор стоимости изделия';
 
                 <!-- РАБОТЫ -->
             
-                <div class="bg-green-100 p-4 rounded-sm mb-4">
-                    <h2 class="text-md font-semibold text-green-800 mb-1">РАБОТЫ</h2>
+                <div class="p-4 mb-4 bg-green-100 rounded-sm">
+                    <h2 class="mb-1 font-semibold text-green-800 text-md">РАБОТЫ</h2>
                     
                     <div id="work-fields-container">
                         <!-- Check if $workModels has any models, else initialize it -->
                         <?php if (!empty($workModels)): ?>
                             <?php foreach ($workModels as $index => $workModel): ?>
-                                <div class="flex items-center space-x-4 mb-3">
+                                <div class="flex items-center mb-3 space-x-4">
                                     <div>
                                         <p class="invisible">|</p>
-                                        <button type="button" id="add-field" class="px-4 py-2 bg-green-600 text-white rounded-sm hover:bg-green-700">
+                                        <button type="button" id="add-field" class="px-4 py-2 text-white bg-green-600 rounded-sm hover:bg-green-700">
                                             +
                                         </button>
                                     </div>
@@ -82,13 +82,13 @@ $this->title = 'Калькулятор стоимости изделия';
                     </div>
                 </div>
                 <!-- ИТОГО -->
-                <div class="bg-blue-200 p-4 rounded-sm mb-4">
+                <div class="p-4 mb-4 bg-blue-200 rounded-sm">
                     <h2 class="text-lg font-bold text-blue-900">Итого стоимость изделия</h2>
-                    <p class="text-blue-800 text-lg font-semibold mt-2">Итого: <span id="total-cost" class="font-bold text-xl">0</span> руб.</p>
+                    <p class="mt-2 text-lg font-semibold text-blue-800">Итого: <span id="total-cost" class="text-xl font-bold">0</span> руб.</p>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="form-group mt-4">
+                <div class="mt-4 form-group">
                     <?= Html::submitButton('Сохранить все данные', ['class' => 'px-6 py-2 bg-green-600 text-white rounded-sm hover:bg-green-700 transition']) ?>
                 </div>
 
@@ -139,8 +139,8 @@ $this->title = 'Калькулятор стоимости изделия';
 
             // New dynamic field HTML
             const newFieldHtml = `
-                <div class="flex items-center space-x-4 mb-3">
-                    <button type="button" class="px-4 py-2 bg-green-600 text-white rounded-sm hover:bg-green-700 remove-field">
+                <div class="flex items-center mb-3 space-x-4">
+                    <button type="button" class="px-4 py-2 text-white bg-green-600 rounded-sm hover:bg-green-700 remove-field">
                         -
                     </button>
                     <div class="flex-1">
