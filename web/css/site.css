@@ -86,3 +86,10 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+.text-nowrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

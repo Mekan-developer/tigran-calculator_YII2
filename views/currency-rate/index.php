@@ -10,7 +10,7 @@ use yii\widgets\LinkPager;
 /** @var app\models\CurrencyRateSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Курсы валют за 30 дней';
+$this->title = "Курсы валют за $day дней";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

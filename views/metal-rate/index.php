@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Курсы металлов';
+$this->title = "Курсы металлов за $day дней" ;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="metal-rate-index  p-6 bg-gray-50">

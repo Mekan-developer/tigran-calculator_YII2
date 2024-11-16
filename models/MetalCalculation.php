@@ -40,10 +40,10 @@ class MetalCalculation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'profile', 'height', 'width', 'ring_size', 'metal', 'tolerance'], 'required'],
-            [['client_id'], 'integer'],
+            [['client_id', 'profile', 'height', 'width', 'ring_size', 'metal_id', 'tolerance'], 'required'],
+            [['client_id','metal_id'], 'integer'],
             [['height', 'width', 'ring_size', 'tolerance'], 'number'],
-            [['profile', 'metal'], 'string', 'max' => 255],
+            [['profile'], 'string', 'max' => 255],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientData::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }
@@ -73,5 +73,10 @@ class MetalCalculation extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(ClientData::class, ['id' => 'client_id']);
+    }
+
+    public function getMetal()
+    {
+        return $this->hasOne(Metal::class, ['id' => 'metal_id']);
     }
 }

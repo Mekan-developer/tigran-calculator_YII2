@@ -31,16 +31,32 @@
     <title><?= Html::encode($this->title) ?></title>
     <?= Html::cssFile('@web/css/tailwind.css') ?>
     <?= Html::cssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css') ?>
+    <style>
+        /* Tooltip styling */
+.tooltip:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+    </style>
 </head>
 <body class="bg-gray-100">
-
-<?php
-$this->registerJs("
-    $(document).ready(function() {
-        console.log('jQuery is working');
-    });
-", \yii\web\View::POS_READY); // Ensures jQuery is ready before running the script
-?>
 
     <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 text-sm text-gray-400 rounded-lg ms-3 sm:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
         <span class="sr-only">Open sidebar</span>
@@ -52,11 +68,32 @@ $this->registerJs("
 
     <aside 
     id="separator-sidebar" 
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-gray-800   sm:translate-x-0 ?>" 
+    class="fixed top-0 left-0 z-40 w-64 rela h-screen transition-transform -translate-x-full bg-gray-800   sm:translate-x-0" 
     aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto">
+        <div class="h-full px-3 py-4 overflow-y-auto ">
+            
             <div class="w-full my-4">
                 <p class="font-bold text-center text-white">LOGO</p>
+                <button
+                data-drawer-target="separator-sidebar"
+                data-drawer-toggle="separator-sidebar"
+                aria-controls="separator-sidebar"
+                type="button"
+                class="absolute top-3 right-3 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-lg p-1"
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                    ></path>
+                </svg>
+            </button>
             </div>
             <ul class="space-y-2 font-medium">
                 <li>

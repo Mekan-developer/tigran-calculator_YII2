@@ -44,11 +44,12 @@ class MetalRateController extends Controller
     {
 
         $date_today = date('d.m.Y');
+        $day = 30;
         // Check if the data has already been updated today
         $lastUpdatedMetalDate = Yii::$app->cache->get('currency_last_updated_metal_date');
         if ($lastUpdatedMetalDate != $date_today) {
             MetalRate::deleteAll();
-            $day = 30;
+            
             
             $date_last_30 = date('d.m.Y', strtotime("-$day days"));
             $url = "https://www.cbr.ru/hd_base/metall/metall_base_new/?UniDbQuery.Posted=True&UniDbQuery.From=$date_last_30&UniDbQuery.To=$date_today&UniDbQuery.Gold=true&UniDbQuery.Silver=true&UniDbQuery.Platinum=true&UniDbQuery.Palladium=true&UniDbQuery.so=1";
@@ -70,6 +71,7 @@ class MetalRateController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'day' => $day
         ]);
 
 

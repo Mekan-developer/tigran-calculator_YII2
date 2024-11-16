@@ -16,7 +16,7 @@ class m241115_054355_create_metal_calculation_table extends Migration
             'height' => $this->decimal(10, 2)->notNull()->comment('Высота'),
             'width' => $this->decimal(10, 2)->notNull()->comment('Ширина'),
             'ring_size' => $this->decimal(10, 2)->notNull()->comment('Размер кольца'),
-            'metal' => $this->string()->notNull()->comment('Металл'),
+            'metal_id' => $this->integer()->notNull()->comment('Металл'), // Changed from string to integer
             'tolerance' => $this->decimal(5, 2)->notNull()->comment('Погрешность, %'),
         ]);
 
@@ -25,6 +25,16 @@ class m241115_054355_create_metal_calculation_table extends Migration
             '{{%metal_calculation}}',
             'client_id',
             '{{%client_data}}',
+            'id',
+            'CASCADE'
+        );
+
+        // Add a foreign key for `metal_id` to the `metals` table
+        $this->addForeignKey(
+            'fk-metal_calculation-metal_id',
+            '{{%metal_calculation}}',
+            'metal_id',
+            '{{%metals}}',
             'id',
             'CASCADE'
         );

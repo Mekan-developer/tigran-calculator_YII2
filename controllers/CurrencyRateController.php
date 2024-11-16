@@ -49,9 +49,9 @@ class CurrencyRateController extends Controller
 
         // Check if the data has already been updated today
         $lastUpdate = Yii::$app->cache->get('currency_last_update');
-     
+        $day = 30;
         if ($lastUpdate != $today) {
-            $day = 30;
+            
             // Update data for the last 10 days
             for ($i = 0; $i < $day; $i++) {
                 $date = date('Y-m-d', strtotime("-$i days"));
@@ -76,6 +76,7 @@ class CurrencyRateController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'day' => $day
         ]);
     }
 
