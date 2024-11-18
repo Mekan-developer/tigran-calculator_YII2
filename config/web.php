@@ -60,6 +60,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'calculator/index',
+                'calculation-base' => 'client-data/index',
                 'metal' => 'metal/index',
 
                 'currency-rate' => 'currency-rate/index',

@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\MetalCalculation;
+use app\models\StoneCalculation;
+use app\models\WorkCalculation;
 use Yii;
 use app\models\ClientData;
 use yii\data\ActiveDataProvider;
@@ -64,12 +67,36 @@ class ClientDataController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // public function actionView($id)
+    // {
+    //     return $this->render('view', [
+    //         'model' => $this->findModel($id),
+    //     ]);
+    // }
+
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+{
+    // Fetch client data
+    $clientModel = ClientData::findOne($id);
+
+    // Fetch related data
+    $metalModel = MetalCalculation::findOne(['client_id' => $id]);
+    $stoneModels = StoneCalculation::findAll(['client_id' => $id]);
+    $workModels = WorkCalculation::findAll(['client_id' => $id]);
+
+    if (!$clientModel) {
+        throw new NotFoundHttpException('Client not found.');
     }
+
+    // Render the data in a detailed view
+    return $this->render('view', [
+        'clientModel' => $clientModel,
+        'metalModel' => $metalModel,
+        'stoneModels' => $stoneModels,
+        'workModels' => $workModels,
+    ]);
+}
+
 
     /**
      * Creates a new ClientData model.
@@ -135,10 +162,19 @@ class ClientDataController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        Yii::$app->request->validateCsrfToken(); // Ensure CSRF token validation
+        $model = ClientData::findOne($id);
+
+        if ($model !== null) {
+            $model->delete();
+            Yii::$app->session->setFlash('success', 'Данные клиента успешно удалены.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Данные клиента не найдены.');
+        }
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the ClientData model based on its primary key value.
