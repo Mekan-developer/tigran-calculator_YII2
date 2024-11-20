@@ -15,66 +15,93 @@ class CalculatorController extends Controller{
     public function actionIndex()
     {
         $clientModel = new ClientData();
-        $metalModel = new MetalCalculation();
+        $metalModel = [new MetalCalculation()];
         $stoneModels = [new StoneCalculation()]; // Initialize with one empty model
         $workModels = [new WorkCalculation()];
-
+       
         if ($clientModel->load(Yii::$app->request->post()) && $clientModel->validate()) {
             $transaction = Yii::$app->db->beginTransaction(); // Start transaction
             try {
-                if ($clientModel->save()) {
-                    $metalModel->client_id = $clientModel->id;
+                $ClientSize = Yii::$app->request->post('ClientSize');
+                $ClientSize = json_decode($ClientSize, true);
 
-                    if ($metalModel->load(Yii::$app->request->post()) && $metalModel->validate() && $metalModel->save()) {
-                        
-                        // Process Stone data
-                        $stonesData = Yii::$app->request->post('StoneCalculation', []);
-                        $stoneModels = [];
-                        foreach ($stonesData as $stone) {
-                            $stoneModel = new StoneCalculation();
-                            $stoneModel->client_id = $clientModel->id;
-                            $stoneModel->attributes = $stone;
+                for ($i=0; $i < count($ClientSize)+1; $i++) { 
+                    $newModel = clone $clientModel; // Clone the model to create a new instance
+                    $newModel->isNewRecord = true; // Mark it as a new record
+                    $newModel->id = null;         // Reset the primary key (if 'id' is the PK field)
 
-                            if ($stoneModel->validate()) {
-                                $stoneModel->save();
-                                $stoneModels[] = $stoneModel;
-                            } else {
-                                throw new \Exception('Validation failed for Stone model: ' . json_encode($stoneModel->errors));
+                    if ($newModel->save()) {
+                        $metalData = Yii::$app->request->post('itemsMetal');
+                        if ($metalData) {
+                            $metalItems = json_decode($metalData, true);
+                           
+                            // foreach ($metalItems as $item) {
+                                $metalModel = new MetalCalculation();
+                                $metalModel->client_id = $newModel->id;
+                                $metalModel->attributes = $metalItems[$i];
+
+                                if ($metalModel->validate()) {
+                                    $metalModel->save();
+                                } else {
+                                    Yii::$app->session->setFlash('error', 'Validation failed for one or more items.');
+                                }
+                            // }
+    
+                            // Process Stone data ************************************************************
+                            $stonesData = Yii::$app->request->post('StoneCalculation', []);
+                            $stoneModels = [];
+                            foreach ($stonesData[$i] as $stone) {
+                                $stoneModel = new StoneCalculation();
+                                $stoneModel->client_id = $newModel->id;
+                                $stoneModel->attributes = $stone;
+    
+                                if ($stoneModel->validate()) {
+                                    $stoneModel->save();
+                                    $stoneModels[] = $stoneModel;
+                                } else {
+                                    throw new \Exception('Validation failed for Stone model: ' . json_encode($stoneModel->errors));
+                                }
                             }
-                        }
+    
+                            // Process Work data ****************************************************
+                            $workData = Yii::$app->request->post('WorkCalculation', []);
+           
+                            $workModels = [];
+    
+                            $errors = [];
+                            foreach ($workData[$i] as $work) {
+                                $workModel = new WorkCalculation();
+                                $workModel->client_id = $newModel->id;
+                                $workModel->attributes = $work;
 
-                        // Process Work data
-                        $workData = Yii::$app->request->post('WorkCalculation', []);
-                        $workModels = [];
-                        
-                        foreach ($workData as $work) {
-                            $workModel = new WorkCalculation();
-                            $workModel->client_id = $clientModel->id;
-                            $workModel->attributes = $work;
-
-                            if ($workModel->validate()) {
-                                $workModel->save();
-                                $workModels[] = $workModel;
-                            } else {
-                                Yii::$app->session->setFlash('error', 'Work model validation failed: ' . json_encode($workModel->errors));
-                                throw new \Exception('Validation failed for Work model.');
+                                if ($workModel->validate()) {
+                                    $workModel->save();
+                                    $workModels[] = $workModel;
+                                } else {
+                                    $errors[] = $workModel->errors;
+                                }
                             }
-                            
-                        }
 
-                        // Commit transaction if all operations succeed
-                        $transaction->commit();
-                        Yii::$app->session->setFlash('success', 'All data saved successfully!');
-                        return $this->refresh();
+                            if (!empty($errors)) {
+                                Yii::$app->session->setFlash('error', 'Some models failed validation: ' . json_encode($errors));
+                            }
+
+    
+                        }
                     }
                 }
+                 // Commit transaction if all operations succeed
+                 $transaction->commit();
+                 Yii::$app->session->setFlash('success', 'All data saved successfully!');
+                 return $this->refresh();
+
             } catch (\Exception $e) {
                 // Rollback transaction if any error occurs
                 $transaction->rollBack();
                 Yii::$app->session->setFlash('error', 'Error occurred while saving data: ' . $e->getMessage());
             }
         }
-
+        
         // Re-render the form with the current state
         return $this->render('index', [
             'clientModel' => $clientModel,

@@ -14,12 +14,6 @@
     $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
     $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
     $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
-
-    // Register jQuery
-    $this->registerJsFile('https://code.jquery.com/jquery-3.6.0.min.js', [
-        'position' => \yii\web\View::POS_HEAD,
-        'depends' => [\yii\web\JqueryAsset::class]
-    ]);
 ?>
 
 
@@ -32,30 +26,8 @@
     <title><?= Html::encode($this->title) ?></title>
     <?= Html::cssFile('@web/css/tailwind.css') ?>
     <?= Html::cssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css') ?>
-    <style>
-        /* Tooltip styling */
-.tooltip:hover::after {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    z-index: 1000;
-    opacity: 1;
-    pointer-events: none;
-}
 
-.tooltip {
-    position: relative;
-    cursor: pointer;
-}
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 <body class="bg-gray-100">
     <?php $this->beginBody() ?>
@@ -148,6 +120,7 @@
     <div class="sm:ml-[250px]">
         <div>
         <?= Alert::widget() ?>
+        
             <?= $content ?>
         </div>
     </div>  
@@ -157,15 +130,7 @@
     <?= Html::jsFile('@web/js/flowbite.min.js') ?>
     <?= Html::jsFile('@web/js/manual.js') ?>
 
-    <!-- Example: Custom JavaScript to test jQuery -->
-    <?php
-    $this->registerJs("
-        $(document).ready(function() {
-            console.log('jQuery is working!');
-        });
-    ", \yii\web\View::POS_READY);
-    ?>
-    
+    <!-- Example: Custom JavaScript to test jQuery -->    
 <?php $this->endBody() ?>
 </body>
 </html>
