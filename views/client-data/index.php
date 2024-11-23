@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Данные клиентов';
+$this->title = 'База расчётов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'calculation_date',
-                    'header' => 'Дата расчета',
+                    'label' => 'Дата расчета',
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
                 [
                     'attribute' => 'manager',
-                    'header' => 'Менеджер',
+                    'label' => 'Менеджер',
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],
@@ -111,9 +111,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     'urlCreator' => function ($action, ClientData $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     },
+                    
                     'buttons' => [
                         'view' => function ($url, $model, $key) {
                             return Html::a('<i class="fas fa-eye"></i>', $url, [
+                                'title' => 'Просмотр',
+                                'class' => 'text-blue-500 hover:underline mx-2'
+                            ]);
+                        },
+                        'edit' => function ($url, $model, $key) {
+                            return Html::a('<i class="fas fa-pen"></i>', $url, [
                                 'title' => 'Просмотр',
                                 'class' => 'text-blue-500 hover:underline mx-2'
                             ]);
@@ -137,7 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 . Html::endTag('span');
                         },
                     ],
-                    'template' => '{view}{delete}', // Only render the view button
+                    'template' => '{view}{edit}{delete}', // Only render the view button
                 ],
                 
             ],

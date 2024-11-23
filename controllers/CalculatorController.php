@@ -3,14 +3,13 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Numbers;
 use yii\web\Controller;
 use app\models\ClientData;
 use app\models\MetalCalculation;
 use app\models\StoneCalculation;
 use app\models\WorkCalculation;
 
-class CalculatorController extends Controller{
+class CalculatorController extends AppController{
 
     public function actionIndex()
     {

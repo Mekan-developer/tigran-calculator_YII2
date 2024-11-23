@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * WorkController implements the CRUD actions for Work model.
  */
-class WorkController extends Controller
+class WorkController extends AppController
 {
     /**
      * @inheritDoc

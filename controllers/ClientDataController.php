@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * ClientDataController implements the CRUD actions for ClientData model.
  */
-class ClientDataController extends Controller
+class ClientDataController extends AppController
 {
     /**
      * @inheritDoc
@@ -133,6 +133,124 @@ class ClientDataController extends Controller
     //     ]);
     // }
 
+
+    public function actionEdit($id)
+    {
+        // Load the main client model
+        $clientModel = ClientData::findOne($id);
+        if (!$clientModel) {
+            throw new \yii\web\NotFoundHttpException("Client not found.");
+        }
+    
+        // Load related models
+        $metalModel = MetalCalculation::findAll(['client_id' => $id]);
+        $stoneModels = StoneCalculation::findAll(['client_id' => $id]);
+        $workModels = WorkCalculation::findAll(['client_id' => $id]);
+    
+        if ($clientModel->load(Yii::$app->request->post()) && $clientModel->validate()) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try 
+            {
+                $clientModel->save();
+    
+                // Update metals
+                $metalData = Yii::$app->request->post('itemsMetal', []);
+
+                
+                // Delete all previous metal calculations for this client
+                MetalCalculation::deleteAll(['client_id' => $id]);
+                // $this->debug($var);die('client_id');
+                // Loop through the new metal data and save each one
+                foreach ($metalData as $data) {
+                    $data['client_id'] = $id;
+                
+                    $newMetalModel = new MetalCalculation();
+
+                    // Populate the model's attributes
+                    if ($newMetalModel->load(['MetalCalculation' => $data]) && $newMetalModel->save()) {
+                        // Successfully saved
+                    } else {
+                        // Handle validation errors if necessary
+                        Yii::error($newMetalModel->errors, 'MetalCalculationSave');
+                    }
+                }
+
+                
+    
+                // Update stones
+                $stonesData = Yii::$app->request->post('StoneCalculation', []);
+                StoneCalculation::deleteAll(['client_id' => $id]);
+          
+                foreach ($stonesData as $stone) {
+                    $newStoneModel = new StoneCalculation();
+                    $newStoneModel->client_id = $id;
+                    $newStoneModel->attributes = $stone;
+                    if (!$newStoneModel->validate()) {
+                        throw new \Exception('Stone validation failed: ' . json_encode($newStoneModel->errors));
+                    }
+                    $newStoneModel->save();
+                }
+            
+    
+                // Update works
+                $workData = Yii::$app->request->post('WorkCalculation', []);
+                WorkCalculation::deleteAll(['client_id' => $id]);
+                foreach ($workData as $work) {
+                    $newWorkModel = new WorkCalculation();
+                    $newWorkModel->client_id = $id;
+                    $newWorkModel->attributes = $work;
+                    if (!$newWorkModel->validate()) {
+                        throw new \Exception('Work validation failed: ' . json_encode($newWorkModel->errors));
+                    }
+                    $newWorkModel->save();
+                }
+        
+    
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', 'Data updated successfully!');
+                return $this->redirect(['view', 'id' => $clientModel->id]);
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error', 'Error occurred while updating data: ' . $e->getMessage());
+            }
+        }
+        //Metal  ***************************************************************************************************************
+        $metalModel = MetalCalculation::findOne(['client_id' => $id]);
+        if(!empty($metalModel)){
+            $itemsMetal = json_encode([$metalModel->attributes], true);
+            // Decode the JSON into an associative array
+            $decodedMetalModel = json_decode($itemsMetal, true);
+        }else{
+            $decodedMetalModel = null;
+        }
+       
+
+        // stone  **************************************************************************************************************
+        // Assuming $stoneModels is an array of `StoneCalculation` objects
+        $stoneModels = array_map(function ($stoneModels) {
+            return $stoneModels->attributes; // Extract the attributes array from each model
+        }, $stoneModels);
+        
+        // Encode the data for Alpine.js
+        // $var = json_encode($stoneModels, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_APOS);
+
+        // Work  **************************************************************************************************************
+
+        $workModels = array_map(function ($workModels) {
+            return $workModels->attributes; // Extract the attributes array from each model
+        }, $workModels);
+ 
+        return $this->render('edit', [
+            'clientModel' => $clientModel,
+            'metalModel' => $decodedMetalModel,
+            'stoneModelsData' => $stoneModels,
+            'workModels' => $workModels,
+        ]);
+    }
+    
+
+
+
     /**
      * Updates an existing ClientData model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -143,7 +261,6 @@ class ClientDataController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

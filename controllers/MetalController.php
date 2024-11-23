@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * MetalController implements the CRUD actions for Metal model.
  */
-class MetalController extends Controller
+class MetalController extends AppController
 {
     /**
      * @inheritDoc

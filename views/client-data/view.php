@@ -7,10 +7,10 @@ use yii\helpers\Html;
 $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio);
 ?>
 <h1 class="text-2xl font-bold mb-2 mt-3 ml-20"><?= Html::encode($this->title) ?></h1>
-<div class="container flex gap-6 mx-auto pb-10">
+<div class="flex gap-6 mx-auto pb-10 px-4">
     <div class="flex-1 bg-gray-200 p-4 rounded-sm">
         <div class="p-4 mb-4 bg-blue-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">ДАННЫЕ КЛИЕНТА</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">ДАННЫЕ КЛИЕНТА</h2>
             <table class="min-w-full border-collapse border border-gray-300">
                 <tr>
                     <th class="border border-gray-300 px-4 py-2 bg-blue-200 text-blue-900">ФИО</th>
@@ -36,7 +36,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-pink-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">ДАННЫЕ О МЕТАЛЛЕ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">ДАННЫЕ О МЕТАЛЛЕ</h2>
             <?php if ($metalModel): ?>
                 <table class="min-w-full border-collapse border border-gray-300">
                     <tr>
@@ -62,7 +62,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-yellow-100 rounded-sm text-[14px]">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">КАМНИ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">КАМНИ</h2>
             <?php if ($stoneModels): ?>
                 <table class="min-w-full border-collapse border  border-gray-300">
                     <tr>
@@ -88,7 +88,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-green-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">РАБОТЫ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">РАБОТЫ</h2>
             <?php if ($workModels): ?>
                 <table class="min-w-full border-collapse border border-gray-300">
                     <tr>
@@ -110,9 +110,8 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
 
     
     <div class="flex-1 bg-gray-200 p-4 rounded-sm">
-
         <div class="p-4 mb-4 bg-blue-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">ДАННЫЕ КЛИЕНТА</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">ДАННЫЕ КЛИЕНТА</h2>
             <table class="min-w-full border-collapse border border-gray-300">
                 <tr>
                     <th class="border border-gray-300 px-4 py-2 bg-blue-200 text-blue-900">ФИО</th>
@@ -138,7 +137,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-pink-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">ДАННЫЕ О МЕТАЛЛЕ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">ДАННЫЕ О МЕТАЛЛЕ</h2>
             <?php if ($metalModel): ?>
                 <table class="min-w-full border-collapse border border-gray-300">
                     <tr>
@@ -164,7 +163,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-yellow-100 rounded-sm text-[14px]">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">КАМНИ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">КАМНИ</h2>
             <?php if ($stoneModels): ?>
                 <table class="min-w-full border-collapse border  border-gray-300">
                     <tr>
@@ -190,7 +189,7 @@ $this->title = 'Детали клиента: ' . Html::encode($clientModel->fio)
         </div>
 
         <div class="p-4 mb-4 bg-green-100 rounded-sm">
-            <h2 class="mb-1 font-semibold text-center  text-black text-md">РАБОТЫ</h2>
+            <h2 class="mb-1 font-semibold text-center  text-black text-md text-[20px]">РАБОТЫ</h2>
             <?php if ($workModels): ?>
                 <table class="min-w-full border-collapse border border-gray-300">
                     <tr>

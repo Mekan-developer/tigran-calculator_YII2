@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = "Курсы металлов за $day дней" ;
+$this->title = "Курсы металлов" ;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="metal-rate-index  p-6 bg-gray-50">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div class="overflow-x-auto mt-6">
-        <?= GridView::widget([
+        <?= GridView::widget([ 
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
             'headerRowOptions' => ['class' => 'bg-gray-50 text-gray-700 text-sm uppercase tracking-wide'],

@@ -10,8 +10,11 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends AppController
 {
+
+    public $layout = 'main';
+
     /**
      * {@inheritdoc}
      */
@@ -71,6 +74,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = 'basic';
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

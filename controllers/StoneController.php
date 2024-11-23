@@ -11,7 +11,7 @@ use yii\filters\VerbFilter;
 /**
  * StoneController implements the CRUD actions for Stone model.
  */
-class StoneController extends Controller
+class StoneController extends AppController
 {
     /**
      * @inheritDoc

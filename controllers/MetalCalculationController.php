@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * MetalCalculationController implements the CRUD actions for MetalCalculation model.
  */
-class MetalCalculationController extends Controller
+class MetalCalculationController extends AppController
 {
     /**
      * @inheritDoc

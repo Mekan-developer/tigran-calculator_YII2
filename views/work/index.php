@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'work_name',
-                    'header' => 'Название работы',
+                    'label' => 'Название работы',
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],

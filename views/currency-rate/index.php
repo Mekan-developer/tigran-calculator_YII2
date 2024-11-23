@@ -10,7 +10,7 @@ use yii\widgets\LinkPager;
 /** @var app\models\CurrencyRateSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = "Курсы валют за $day дней";
+$this->title = "Курсы валют";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -66,9 +66,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!-- GridView -->
     <div class="mt-6 overflow-x-auto">
-        <?= GridView::widget([
+        <?= GridView::widget([ 
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
+            'headerRowOptions' => ['class' => 'bg-gray-50 text-gray-700 text-sm uppercase tracking-wide'],
+            'rowOptions' => function ($model, $key, $index, $grid) {
+                return ['class' => $index % 2 === 0 ? 'bg-white' : 'bg-gray-50'];
+            },
             'columns' => [
                 [
                     'class' => 'yii\grid\SerialColumn',
@@ -82,19 +86,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'date',
-                    'header' => 'Дата',
+                    'label' => 'Дата',
                     'headerOptions' => ['class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'],
                     'contentOptions' => ['class' => 'px-4 py-2 text-center text-gray-800'],
                 ],
                 [
                     'attribute' => 'currency',
-                    'header' => 'Валюта',
+                    'label' => 'Валюта',
                     'headerOptions' => ['class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'],
                     'contentOptions' => ['class' => 'px-4 py-2 text-center text-gray-800'],
                 ],
                 [
                     'attribute' => 'rate',
-                    'header' => 'Курс, руб',
+                    'label' => 'Курс, руб',
                     'headerOptions' => ['class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'],
                     'contentOptions' => ['class' => 'px-4 py-2 text-center text-gray-800'],
                 ],
@@ -127,8 +131,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-confirm' => 'Вы уверены, что хотите удалить этот элемент?',
                                     'style' => 'background: none; border: none; cursor: pointer;',
                                 ])
-                                . Html::endForm(),
-                                ['style' => 'margin: 0 10px; display: inline;']
+                                . Html::endForm()
+                                . Html::endTag('span')
                             );
                         },
 
