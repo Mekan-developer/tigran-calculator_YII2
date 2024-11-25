@@ -27,17 +27,10 @@
     <!-- METALS -->
     <h2 class="text-lg font-semibold text-pink-600 mt-8 mb-4">Металлы</h2>
     <div x-data='{
-            itemsMetal: <?php echo json_encode($metalModel); ?>,
-            addItem() {
-                this.itemsMetal.push({ profile: "", height: "", width: "", ring_size: "", metal_id: "", tolerance: "" });
-            },
-            removeItem(index) {
-                this.itemsMetal.splice(index, 1);
-            }
+            itemsMetal: <?php echo json_encode($metalModel); ?>
         }' class="space-y-4">
         <template x-for="(item, index) in itemsMetal" :key="index">
             <div class="bg-pink-100 p-4 rounded relative">
-                <button type="button" class="absolute top-2 right-2 text-red-600" @click="removeItem(index)" x-show="index > 0">&times;</button>
                 <div>
                     <label :for="'profile_' + index" class="block text-gray-700 font-medium">Профиль</label>
                     <input type="text" x-model="item.profile" :name="`itemsMetal[${index}][profile]`" :id="'profile_' + index" 
@@ -76,7 +69,6 @@
                 </div>
             </div>
         </template>
-        <button type="button" @click="addItem()" class="bg-pink-600 text-white px-4 py-2 rounded">Add Item</button>
     </div>
 
 
@@ -175,7 +167,7 @@
     </div>
 
     <!-- SUBMIT BUTTON -->
-    <div class="form-group mt-8">
+    <div class="form-group mt-8 flex justify-end">
         <?= Html::submitButton('Сохранить изменения', ['class' => 'px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition']) ?>
     </div>
 

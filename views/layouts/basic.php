@@ -6,8 +6,6 @@
     use app\assets\AppAsset;
     AppAsset::register($this);
 
-
-
     $this->registerCsrfMetaTags();
     $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
     $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
@@ -24,14 +22,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= Html::encode($this->title) ?></title>
-    <?= Html::cssFile('@web/css/tailwind.css') ?>
-    <?= Html::cssFile('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css') ?>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <?php $this->head() ?>
 </head>
 <body class="bg-gray-100">
     <?php $this->beginBody() ?>
-    
 
     <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 text-sm text-gray-400 rounded-lg ms-3 text-nowrap text-[14px] sm:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
         <span class="sr-only">Open sidebar</span>
@@ -50,7 +44,7 @@
             <div class="w-full my-4">
                 <p class="font-bold text-center text-gray-500">Тигран - Калькуляторы</p>
             </div>
-            <ul class="font-medium w-full space-y-2">
+            <ul class="font-medium w-full space-y-2 flex flex-col items-center">
                 <li>
                     <a href="<?= yii\helpers\Url::to(['calculator/index']) ?>" 
                         class="flex no-underline w-[200px] items-center p-2 text-white  rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'calculator' ? 'bg-gray-700' : '' ?>">
@@ -122,14 +116,7 @@
             <?php include('partials/_alert.php'); ?>        
             <?= $content ?>
         </div>
-    </div>  
-
-
-    <!-- Include Flowbite JS from the local web folder -->
-    <?= Html::jsFile('@web/js/flowbite.min.js') ?>
-    <?= Html::jsFile('@web/js/manual.js') ?>
-
-    <!-- Example: Custom JavaScript to test jQuery -->    
+    </div>     
 <?php $this->endBody() ?>
 </body>
 </html>

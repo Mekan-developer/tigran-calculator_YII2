@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="mb-4">
                     <?= $form->field($model, 'date')->input('date', [
                         'class' => 'block w-full p-2.5 border border-gray-300 rounded-sm shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                        'value' => date('Y-m-d'),
                         'required' => true,
                     ])->label('Дата *', ['class' => 'block text-sm font-medium text-gray-700 mb-1']) ?>
                 </div>

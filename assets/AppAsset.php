@@ -21,10 +21,12 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/tailwind.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'
     ];
     public $js = [
-        'https://cdn.jsdelivr.net/npm/flowbite@1.4.2/dist/flowbite.min.js', // Flowbite JS after jQuery
-        'js/site.js',
+        'js/flowbite.min.js',
+        'js/alpine.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
