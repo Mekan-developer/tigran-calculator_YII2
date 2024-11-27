@@ -8,6 +8,7 @@ use app\models\WorkCalculation;
 use Yii;
 use app\models\ClientData;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,6 +31,31 @@ class ClientDataController extends AppController
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'actions' => ['delete'],
+                            'roles' => ['admin'],
+                            'allow' => true,
+                        ],
+                        [
+                            'actions' => ['index','view','edit'],
+                            'roles' => ['admin','manager'],
+                            'allow' => true,
+                        ]
+                    ],
+                    'denyCallback' => function ($rule, $action) {
+                        if(Yii::$app->user->isGuest){
+                            return Yii::$app->response->redirect(['login']);
+                        }
+                        // elseif (Yii::$app->user->identity->username === 'user') {
+                        //     return Yii::$app->response->redirect(['calculation-base']);
+                        // }
+                        throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page.');
+                    },
+
                 ],
             ]
         );

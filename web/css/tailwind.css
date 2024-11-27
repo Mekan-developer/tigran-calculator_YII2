@@ -1091,6 +1091,10 @@ input:checked + .toggle-bg {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -1131,6 +1135,38 @@ input:checked + .toggle-bg {
   top: 1rem;
 }
 
+.top-full {
+  top: 100%;
+}
+
+.top-\[10px\] {
+  top: 10px;
+}
+
+.top-\[100px\] {
+  top: 100px;
+}
+
+.top-\[20px\] {
+  top: 20px;
+}
+
+.top-\[60px\] {
+  top: 60px;
+}
+
+.top-\[48px\] {
+  top: 48px;
+}
+
+.top-\[52px\] {
+  top: 52px;
+}
+
+.right-1 {
+  right: 0.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1149,6 +1185,10 @@ input:checked + .toggle-bg {
 
 .z-50 {
   z-index: 50;
+}
+
+.z-\[99999\] {
+  z-index: 99999;
 }
 
 .mx-1 {
@@ -1315,6 +1355,10 @@ input:checked + .toggle-bg {
   height: 36px;
 }
 
+.h-\[60px\] {
+  height: 60px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -1363,8 +1407,16 @@ input:checked + .toggle-bg {
   width: 40px;
 }
 
+.w-\[800px\] {
+  width: 800px;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-48 {
+  width: 12rem;
 }
 
 .min-w-\[60px\] {
@@ -1381,6 +1433,10 @@ input:checked + .toggle-bg {
 
 .max-w-4xl {
   max-width: 56rem;
+}
+
+.max-w-md {
+  max-width: 28rem;
 }
 
 .flex-1 {
@@ -1551,6 +1607,12 @@ input:checked + .toggle-bg {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .overflow-hidden {
@@ -1901,6 +1963,14 @@ input:checked + .toggle-bg {
   text-align: center;
 }
 
+.text-end {
+  text-align: end;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1960,6 +2030,11 @@ input:checked + .toggle-bg {
 
 .tracking-wide {
   letter-spacing: 0.025em;
+}
+
+.text-\[\#1e3c72\] {
+  --tw-text-opacity: 1;
+  color: rgb(30 60 114 / var(--tw-text-opacity));
 }
 
 .text-black {
@@ -2252,6 +2327,11 @@ input:checked + .toggle-bg {
   background-color: rgb(142 75 16 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
 .hover\:text-blue-600:hover {
   --tw-text-opacity: 1;
   color: rgb(28 100 242 / var(--tw-text-opacity));
@@ -2468,6 +2548,10 @@ input:checked + .toggle-bg {
 @media (min-width: 640px) {
   .sm\:ml-\[250px\] {
     margin-left: 250px;
+  }
+
+  .sm\:flex {
+    display: flex;
   }
 
   .sm\:hidden {

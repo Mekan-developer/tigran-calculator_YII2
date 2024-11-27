@@ -7,6 +7,8 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use Yii;
 
 /**
  * WorkController implements the CRUD actions for Work model.
@@ -18,6 +20,7 @@ class WorkController extends AppController
      */
     public function behaviors()
     {
+
         return array_merge(
             parent::behaviors(),
             [
@@ -26,6 +29,31 @@ class WorkController extends AppController
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'actions' => ['delete'],
+                            'roles' => ['admin'],
+                            'allow' => true,
+                        ],
+                        [
+                            'actions' => ['index','create','view','update'],
+                            'roles' => ['manager'],
+                            'allow' => true,
+                        ]
+                    ],
+                    'denyCallback' => function ($rule, $action) {
+                        if(Yii::$app->user->isGuest){
+                            return Yii::$app->response->redirect(['login']);
+                        }
+                        // elseif (Yii::$app->user->identity->username === 'user') {
+                        //     return Yii::$app->response->redirect(['calculation-base']);
+                        // }
+                        throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page.');
+                    },
+
                 ],
             ]
         );

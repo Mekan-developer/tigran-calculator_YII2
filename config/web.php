@@ -33,8 +33,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\User\UserRecord',
             'enableAutoLogin' => true,
+            'loginUrl' => ['login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -77,9 +78,14 @@ $config = [
         ],
         // url manager ***************************************************************************************************
 
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         
     ],
     'params' => $params,
+    'extensions' => require(__DIR__.'/../vendor/yiisoft/extensions.php')
 ];
 
 if (YII_ENV_DEV) {
@@ -95,8 +101,9 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
+    
 }
 
 return $config;

@@ -3,13 +3,53 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\ClientData;
 use app\models\MetalCalculation;
 use app\models\StoneCalculation;
 use app\models\WorkCalculation;
+use yii\filters\VerbFilter;
 
-class CalculatorController extends AppController{
+class CalculatorController extends AppController
+{
+
+    public function behaviors()
+    {
+
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'actions' => ['index'],
+                            'roles' => ['admin','manager'],
+                            'allow' => true,
+                        ]
+                    ],
+                    'denyCallback' => function ($rule, $action) {
+                        if(Yii::$app->user->isGuest){
+                            return Yii::$app->response->redirect(['login']);
+                        }
+                        // elseif (Yii::$app->user->identity->username === 'user') {
+                        //     return Yii::$app->response->redirect(['calculation-base']);
+                        // }
+                        throw new \yii\web\ForbiddenHttpException('You are not allowed to access this page.');
+                    },
+
+                ],
+            ]
+        );
+    }
+
 
     public function actionIndex()
     {
