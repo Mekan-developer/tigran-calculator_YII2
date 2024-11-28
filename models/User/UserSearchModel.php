@@ -41,6 +41,7 @@ class UserSearchModel extends UserRecord
     public function search($params)
     {
         $query = UserRecord::find();
+  
 
         // add conditions that should always apply here
 
@@ -62,7 +63,7 @@ class UserSearchModel extends UserRecord
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username]);
-
+        
         return $dataProvider;
     }
 }

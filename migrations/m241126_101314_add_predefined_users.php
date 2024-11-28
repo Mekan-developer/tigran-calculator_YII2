@@ -14,7 +14,7 @@ class m241126_101314_add_predefined_users extends Migration
     public function safeUp()
     {
 
-        foreach(['manager' => '1','admin' => '1',] as $username => $password){
+        foreach(['admin' => '1','manager' => '1'] as $username => $password){
             $user = new UserRecord();
             $user->attributes = compact('username', 'password');
             $user->save();

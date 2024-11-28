@@ -2,8 +2,20 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(to bottom, #5276b9, #2a5298); /* Background color */
+    background: #2a5298; /* Dark blue background */
     overflow: hidden;
+    position: relative; /* Required for absolute positioning of the pseudo-element */
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #5276b9; /* Light blue color */
+    clip-path: polygon(0 0, 100% 0, 0 100%); /* Creates the diagonal */
 }
 
 .snow {
@@ -15,3 +27,4 @@ body {
     /* pointer-events: none; */
     z-index: 10;
 }
+

@@ -1,0 +1,2 @@
+* php yii migrate --migrationPath='@yii/rbac/migrations'
+!!!! -- use above code before migration

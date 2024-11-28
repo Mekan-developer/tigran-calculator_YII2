@@ -36,6 +36,10 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
         ];
     }
 
+
+
+
+
     /**
      * {@inheritdoc}
      */
@@ -43,8 +47,8 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
-            'password' => 'Password',
+            'username' => 'Имя пользователя',
+            'password' => 'Пароль',
             'auth_key' => 'Auth Key',
         ];
     }
