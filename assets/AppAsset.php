@@ -23,7 +23,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/flowbite.min.css',
         'css/tailwind.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+        'fontsAwesome/css/all.min.css',
+        // 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
         'https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css'
     ];
     public $js = [
@@ -31,6 +32,7 @@ class AppAsset extends AssetBundle
         'js/alpine.js'
     ];
     public $depends = [
+        '\rmrevin\yii\fontawesome\AssetBundle',
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset'
     ];

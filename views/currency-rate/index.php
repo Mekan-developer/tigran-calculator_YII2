@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="p-6 currency-rate-index bg-gray-50">
 
-    <h1 class="text-2xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
     <p class="mt-4">
         <?= Html::a('Создать запись', ['create'], [
             'class' => 'inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow'

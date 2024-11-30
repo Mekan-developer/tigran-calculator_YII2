@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="client-data-index p-6 bg-gray-50">
 
-    <h1 class="text-2xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
 
     <!-- Create Client Data Button -->
    
@@ -90,15 +90,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 
                 [
-                    'attribute' => 'manager',
-                    'label' => 'Менеджер',
+                    'attribute' => 'manager', // This is the manager ID field in your model
+                    'label' => 'Менеджер', // Label to show in the header
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],
                     'contentOptions' => [
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
+                    'value' => function ($model) {
+                        // Manually query the User table to get the manager's name
+                        $manager = Yii::$app->db->createCommand('SELECT `name` FROM user WHERE id = :id')
+                            ->bindValue(':id', $model->manager)  // Bind the manager ID
+                            ->queryScalar(); // Fetch the username as a single value
+                        
+                        return $manager ? $manager : 'Не назначен'; // Return the manager's username or 'Не назначен' if not found
+                    }
                 ],
+
                 [
                     'class' => ActionColumn::className(),
                     'header' => 'Действия',

@@ -45,12 +45,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 [
                     'class' => 'yii\grid\DataColumn', // Отображение имени пользователя в обычной колонке данных
+                    'attribute' => 'name', // Атрибут
+                    'headerOptions' => ['class' => 'text-center'],
+                    'contentOptions' => [
+                        'class' => 'px-4 py-2 text-center text-gray-800'
+                    ],
+                ],  
+                
+                [
+                    'class' => 'yii\grid\DataColumn', // Отображение имени пользователя в обычной колонке данных
                     'attribute' => 'username', // Атрибут
                     'headerOptions' => ['class' => 'text-center'],
                     'contentOptions' => [
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
-                ],                
+                ],  
                 
 
                 [

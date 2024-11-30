@@ -25,12 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="card-body">
         <?php $form = ActiveForm::begin(); ?>
 
+            <?= $form->field($model, 'name') ?>
             <?= $form->field($model, 'username') ?>
 
             <?= $form->field($model, 'password')->passwordInput() ?>  <!-- Password field -->
 
             <div class="form-group">
-                <?= Html::submitButton('Создать', ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton('Создать', ['class' => 'btn bg-[#2a5298] text-white hover:bg-[#172554]']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

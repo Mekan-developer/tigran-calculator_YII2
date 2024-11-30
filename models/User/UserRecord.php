@@ -29,8 +29,8 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-            [['username', 'password'], 'required'],
-            [['username', 'password'], 'string', 'max' => 255],
+            [['username', 'password','name'], 'required'],
+            [['username', 'password','name'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
         ];
@@ -47,6 +47,7 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     {
         return [
             'id' => 'ID',
+            'name' => 'Имя',
             'username' => 'Имя пользователя',
             'password' => 'Пароль',
             'auth_key' => 'Auth Key',
@@ -111,7 +112,7 @@ class UserRecord extends \yii\db\ActiveRecord implements \yii\web\IdentityInterf
     
     public static function findIdentityByAccessToken($token, $type = null){
         throw new NotSupportedException(
-            'You can Authonticate by only username and password'
+            'Вы можете авторизоваться только по имени пользователя и паролю'
         );
     }
 

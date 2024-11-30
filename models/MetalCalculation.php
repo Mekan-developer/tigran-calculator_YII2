@@ -40,10 +40,11 @@ class MetalCalculation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'profile', 'height', 'width', 'ring_size', 'metal_id', 'tolerance'], 'required'],
+            [['client_id', 'profile', 'height', 'width', 'ring_size', 'metal_id', 'rounding'], 'required'],
             [['client_id','metal_id'], 'integer'],
             [['height', 'width', 'ring_size', 'tolerance'], 'number'],
             [['profile'], 'string', 'max' => 255],
+            [['rounding'], 'integer', 'min' => 0, 'max' => 100], // Ensure rounding is between 0 and 100
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientData::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }

@@ -12,18 +12,32 @@
 
 
 <div x-data="{
-    itemsMetal: [{ profile: '', height: '', width: '', ring_size: '', metal_id: '', tolerance: '' }],
-    addItem() {this.itemsMetal.push({ profile: '', height: '', width: '', ring_size: '', metal_id: '', tolerance: '' });},
-    removeItem(index) {this.itemsMetal.splice(index, 1);}
+    num:0,
+    itemsMetal: [{ profile: '', height: '', width: '', ring_size: '', metal_id: '', tolerance: '',rounding:'' }],
+    addItem() {
+        // Push a new object with values copied from the first item in the array
+        let firstItem = this.itemsMetal[this.num];
+        this.itemsMetal.push({
+            profile: firstItem.profile,
+            height: firstItem.height,
+            width: firstItem.width,
+            ring_size: firstItem.ring_size,
+            metal_id: firstItem.metal_id,
+            rounding: firstItem.rounding,
+            tolerance: firstItem.tolerance
+        });
+    },
+    removeItem(index) {this.itemsMetal.splice(index, 1); this.num--;}
 
 
 }"
 
-class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container">
-    <div class="flex-1 p-4 rounded-sm shadow-lg calculation-form bg-gray-50">
+class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container mt-4">
+    <div class="flex-1 p-4 rounded-sm shadow-lg calculation-form bg-gray-200">
         <?php $form = ActiveForm::begin(); ?>
-        <div class="flex flex-col gap-4 p-4">
-            <h1 class="mb-1 text-xl font-semibold text-gray-800"><?= Html::encode($this->title) ?></h1>
+        <h1 class="text-xl font-bold text-[#172554] mb-2"><?= Html::encode($this->title) ?></h1>
+        <div class="flex flex-col gap-4 ">
+            
             <div x-data="{ itemsDiv: [] }" class="flex gap-4 ">
             <input type="hidden" name="ClientSize" :value="JSON.stringify(itemsDiv)" >
                 <div class="flex-1">
@@ -45,17 +59,13 @@ class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container">
                         <?php include('partials/_work.php'); ?>
                     </div>  
 
-                    <!-- ИТОГО -->
-                    <div class="p-4 mb-4 bg-blue-200 rounded-sm">
-                        <h2 class="text-lg font-bold text-blue-900">Итого стоимость изделия</h2>
-                        <p class="mt-2 text-lg font-semibold text-blue-800">Итого: <span id="total-cost" class="text-xl font-bold">0</span> руб.</p>
-                    </div>
+                    
                     <!-- Submit Button -->
                     
                 </div>
 
-                <div @click="itemsDiv.push(itemsDiv.length + 1) && addItem()"  x-show="itemsDiv.length !== 2" 
-                    class="flex justify-center items-center w-[36px] h-[36px] bg-green-500 text-white rounded-sm cursor-pointer" >
+                <div @click="itemsDiv.push(itemsDiv.length + 1); addItem(); num++"  x-show="itemsDiv.length !== 2" 
+                    class="flex justify-center items-center w-[36px] h-[36px] bg-[#2a5298] text-white rounded-sm cursor-pointer" >
                     +
                 </div>
             </div>

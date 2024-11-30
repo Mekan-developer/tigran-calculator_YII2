@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\user\UserRecord $model */
 
-$this->title = 'Update profile: ';
+$this->title = 'Обновить профиль: ';
 $this->params['breadcrumbs'][] = ['label' => 'User Records', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => Html::encode($model->username), 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -22,12 +22,14 @@ $this->params['breadcrumbs'][] = 'Update';
         <div class="card-body">
         <?php $form = ActiveForm::begin(); ?>
 
+        <?= $form->field($model, 'name') ?>
+
         <?= $form->field($model, 'username') ?>
 
         <?= $form->field($model, 'password')->passwordInput() ?>  <!-- Password field -->
 
         <div class="form-group">
-            <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Обновить', ['class' => 'btn bg-[#2a5298] text-white hover:bg-[#172554]']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
