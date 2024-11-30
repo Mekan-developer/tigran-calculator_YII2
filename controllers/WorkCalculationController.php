@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * WorkCalculationController implements the CRUD actions for WorkCalculation model.
  */
-class WorkCalculationController extends Controller
+class WorkCalculationController extends AppController
 {
     /**
      * @inheritDoc

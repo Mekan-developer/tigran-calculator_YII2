@@ -33,10 +33,9 @@ class WorkCalculation extends \yii\db\ActiveRecord
     {
         return [
             
-            [['client_id', 'work_type', 'cost'], 'required'],
-            [['client_id'], 'integer'],
+            [['work_id', 'client_id'], 'required'],
+            [['work_id', 'client_id'], 'integer'],
             [['cost'], 'number', 'min' => 0, 'tooSmall' => 'Cost must be a positive number.'],
-            [['work_type'], 'string', 'max' => 255],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientData::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }
@@ -49,7 +48,7 @@ class WorkCalculation extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'client_id' => 'Client ID',
-            'work_type' => 'Work Type',
+            'work_id' => 'Work Type',
             'cost' => 'Cost',
         ];
     }
@@ -62,5 +61,10 @@ class WorkCalculation extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(ClientData::class, ['id' => 'client_id']);
+    }
+
+    public function getWork()
+    {
+        return $this->hasOne(Work::class, ['id' => 'work_id']);
     }
 }

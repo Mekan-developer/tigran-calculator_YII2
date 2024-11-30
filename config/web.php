@@ -7,7 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    
+    'layout' => 'basic',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -33,8 +33,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\User\UserRecord',
             'enableAutoLogin' => true,
+            'loginUrl' => ['login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -60,6 +61,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'calculator/index',
+                'calculation-base' => 'client-data/index',
                 'metal' => 'metal/index',
 
                 'currency-rate' => 'currency-rate/index',
@@ -75,9 +78,14 @@ $config = [
         ],
         // url manager ***************************************************************************************************
 
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         
     ],
     'params' => $params,
+    'extensions' => require(__DIR__.'/../vendor/yiisoft/extensions.php')
 ];
 
 if (YII_ENV_DEV) {
@@ -93,8 +101,9 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
+    
 }
 
 return $config;

@@ -40,8 +40,8 @@ class Metal extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'density' => 'Density',
+            'name' => 'Имя',
+            'density' => 'Плотность',
         ];
     }
 }

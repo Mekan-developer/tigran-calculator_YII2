@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * StoneCalculationController implements the CRUD actions for StoneCalculation model.
  */
-class StoneCalculationController extends Controller
+class StoneCalculationController extends AppController
 {
     /**
      * @inheritDoc

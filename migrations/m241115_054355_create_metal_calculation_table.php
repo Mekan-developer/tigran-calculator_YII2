@@ -17,7 +17,8 @@ class m241115_054355_create_metal_calculation_table extends Migration
             'width' => $this->decimal(10, 2)->notNull()->comment('Ширина'),
             'ring_size' => $this->decimal(10, 2)->notNull()->comment('Размер кольца'),
             'metal_id' => $this->integer()->notNull()->comment('Металл'), // Changed from string to integer
-            'tolerance' => $this->decimal(5, 2)->notNull()->comment('Погрешность, %'),
+            'rounding' =>$this->integer()->notNull()->comment('Скругление'),
+            'tolerance' => $this->decimal(5, 2)->defaultValue(0)->comment('Погрешность, %'),
         ]);
 
         $this->addForeignKey(

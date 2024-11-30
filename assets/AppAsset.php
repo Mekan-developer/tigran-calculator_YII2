@@ -21,15 +21,18 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/flowbite.min.css',
+        'css/tailwind.css',
+        'fontsAwesome/css/all.min.css',
+        // 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+        'https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css'
     ];
     public $js = [
-        'https://code.jquery.com/jquery-3.6.0.min.js',
-        'https://cdn.jsdelivr.net/npm/flowbite@1.4.2/dist/flowbite.min.js', // Flowbite JS after jQuery
-        'js/site.js',
-        // 'https://code.jquery.com/jquery-3.6.0.min.js', // Add jQuery from CDN
-        // 'js/site.js', // Your custom JS file
+        'js/flowbite.min.js',
+        'js/alpine.js'
     ];
     public $depends = [
+        '\rmrevin\yii\fontawesome\AssetBundle',
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset'
     ];

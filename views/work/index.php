@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="work-index  p-6 bg-gray-50">
 
-    <h1 class="text-2xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
 
     <p class="mt-4">
         <?= Html::a('Создать работу', ['create'], [
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'attribute' => 'work_name',
-                    'header' => 'Название работы',
+                    'label' => 'Название работы',
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
                     ],
