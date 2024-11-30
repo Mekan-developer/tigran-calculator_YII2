@@ -1318,10 +1318,6 @@ input:checked + .toggle-bg {
   width: 100%;
 }
 
-.w-\[30px\] {
-  width: 30px;
-}
-
 .w-\[40px\] {
   width: 40px;
 }
@@ -1824,6 +1820,10 @@ input:checked + .toggle-bg {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pl-\[56px\] {
+  padding-left: 56px;
 }
 
 .text-left {

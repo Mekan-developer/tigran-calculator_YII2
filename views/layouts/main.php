@@ -68,32 +68,12 @@
 
     <aside 
     id="separator-sidebar" 
-    class="fixed top-0 left-0 z-40 w-64 rela h-screen transition-transform -translate-x-full bg-gray-800   sm:translate-x-0" 
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-gray-800 rela sm:translate-x-0" 
     aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto ">
             
             <div class="w-full my-4">
                 <p class="font-bold text-center text-white">LOGO</p>
-                <button
-                data-drawer-target="separator-sidebar"
-                data-drawer-toggle="separator-sidebar"
-                aria-controls="separator-sidebar"
-                type="button"
-                class="absolute top-3 right-3 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-lg p-1"
-            >
-                <svg
-                    class="w-5 h-5"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                >
-                    <path
-                        fill-rule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                    ></path>
-                </svg>
-            </button>
             </div>
             <ul class="space-y-2 font-medium">
                 <li>
@@ -107,7 +87,8 @@
 
                 
                 <li>
-                    <a href="<?= yii\helpers\Url::to(['work/index']) ?>" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
+                    <a href="<?= yii\helpers\Url::to(['client-data/index']) ?>" 
+                    class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group <?= Yii::$app->controller->id === 'client-data' ? 'bg-gray-700' : '' ?>">
                         <i class="fa-solid flex-shrink-0 text-size-[20px] text-gray-400 transition duration-75 group-hover:text-white fa-chart-pie"></i>
                         <span class="ms-3">База расчётов</span>
                     </a>
@@ -157,14 +138,14 @@
                     </a>
                 </li>
                 
-                <li>
+                <!-- <li>
                     <a href="#" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 group">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                             <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                         </svg>
                         <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </aside>
@@ -179,17 +160,7 @@
 
     <!-- Include Flowbite JS from the local web folder -->
     <?= Html::jsFile('@web/js/flowbite.min.js') ?>
-    <?= Html::jsFile('@web/js/manual.js') ?>
-
-    <!-- Example: Custom JavaScript to test jQuery -->
-    <?php
-    $this->registerJs("
-        $(document).ready(function() {
-            console.log('jQuery is working!');
-        });
-    ", \yii\web\View::POS_READY);
-    ?>
-    
+    <?= Html::jsFile('@web/js/manual.js') ?>    
 
 </body>
 </html>

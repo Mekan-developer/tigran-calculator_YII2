@@ -13,7 +13,7 @@ $this->title = 'Данные клиентов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="client-data-index p-6 bg-gray-50">
+<div class="p-6 client-data-index bg-gray-50">
 
     <h1 class="text-2xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
 
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <!-- GridView -->
-    <div class="overflow-x-auto mt-6">
+    <div class="mt-6 overflow-x-auto">
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
@@ -40,16 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
                 ],
-                [
-                    'attribute' => 'id',
-                    'header' => 'ID',
-                    'headerOptions' => [
-                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
-                    ],
-                    'contentOptions' => [
-                        'class' => 'px-4 py-2 text-center text-gray-800'
-                    ],
-                ],
+
                 [
                     'attribute' => 'fio',
                     'header' => 'ФИО',
@@ -128,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
             ],
-            'summary' => '<div class="text-gray-600 text-sm px-6 py-4">Показаны {begin}-{end} из {totalCount} элементов</div>',
+            'summary' => '<div class="px-6 py-4 text-sm text-gray-600">Показаны {begin}-{end} из {totalCount} элементов</div>',
             'pager' => [
                 'options' => ['class' => 'flex justify-center py-4'],
                 'linkOptions' => ['class' => 'mx-1 px-3 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100'],

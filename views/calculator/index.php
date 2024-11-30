@@ -57,49 +57,59 @@ $this->title = 'Калькулятор стоимости изделия';
                     <div id="stone-fields-container">
                         <?php if (!empty($stoneModels)): ?>
                             <?php foreach ($stoneModels as $index => $stoneModel): ?>
-                                <div class="flex items-center mb-3 space-x-4">
-                                    <div>
-                                        <p class="invisible">|</p>
-                                        <button type="button" id="add-stone-field" class="w-[40px] aspect-square text-white bg-yellow-600 rounded-sm hover:bg-yellow-700">
-                                            + 
-                                        </button>
-                                    </div>
-                                    <div class="flex-1">
-                                        <?= $form->field($stoneModel, "[$index]stone_id")->dropDownList(
-                                            \yii\helpers\ArrayHelper::map(
-                                                Stone::find()->all(),
-                                                'id',
-                                                function ($model) {
-                                                    return $model->material . ' - ' . $model->cut . ' - (' . $model->diameter . ' мм - ' . $model->height . ' мм)';
-                                                }
-                                            ),
-                                            [
-                                                'prompt' => 'Выберите камень',
-                                                'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500'
-                                            ]
-                                        )->label('Камень') ?>
+                                <div class="flex flex-col items-center w-full mb-3">
+                                    <div class="flex flex-row w-full gap-4">
+                                        <div>
+                                            <p class="invisible">|</p>
+                                            <button type="button" id="add-stone-field" class="w-[40px] aspect-square text-white bg-yellow-600 rounded-sm hover:bg-yellow-700">
+                                                + 
+                                            </button>
+                                        </div>
+                                        <div class="w-full">
+                                            <?= $form->field($stoneModel, "[$index]stone_id")->dropDownList(
+                                                \yii\helpers\ArrayHelper::map(
+                                                    Stone::find()->all(),
+                                                    'id',
+                                                    function ($model) {
+                                                        return $model->material . ' - ' . $model->cut . ' - (' . $model->diameter . ' мм - ' . $model->height . ' мм)';
+                                                    }
+                                                ),
+                                                [
+                                                    'prompt' => 'Выберите камень',
+                                                    'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500'
+                                                ]
+                                            )->label('Камень') ?>
+                                        </div>
                                     </div>
 
-                                    <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden text-ellipsis"   title = 'Введите стоимость за 1 шт' >
-                                        <?= $form->field($stoneModel, "[$index]cost_per_unit")->textInput([
-                                            'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
-                                        ])->label('Стоимость за 1 шт') ?>
+                                    <div class="flex flex-row w-full gap-4 pl-[56px]">                                    
+                                        <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden text-ellipsis"   title = 'Введите стоимость за 1 шт' >
+                                            <?= $form->field($stoneModel, "[$index]cost_per_unit")->textInput([
+                                                'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
+                                            ])->label('Стоимость за 1 шт') ?>
+                                        </div>
+                                        <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите возможный максимум'>
+                                            <?= $form->field($stoneModel, "[$index]max_possible")->textInput([
+                                                'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
+                                            ])->label('Возможный максимум') ?>
+                                        </div>
                                     </div>
-                                    <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите возможный максимум'>
-                                        <?= $form->field($stoneModel, "[$index]max_possible")->textInput([
-                                            'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
-                                        ])->label('Возможный максимум') ?>
+                                      
+                                    <div class="flex flex-row w-full gap-4 pl-[56px]">
+
+                                        <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите количество' >
+                                            <?= $form->field($stoneModel, "[$index]quantity")->textInput([
+                                                'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
+                                            ])->label('Кол-во') ?>
+                                        </div>
+                                        <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите стоимость закрепки за 1 шт'>
+                                            <?= $form->field($stoneModel, "[$index]setting_cost")->textInput([
+                                                'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
+                                            ])->label('Стоимость закрепки за 1 шт') ?>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите количество' >
-                                        <?= $form->field($stoneModel, "[$index]quantity")->textInput([
-                                            'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
-                                        ])->label('Кол-во') ?>
-                                    </div>
-                                    <div class="flex-1 text-nowrap min-w-[60px] overflow-hidden relative" title = 'Введите стоимость закрепки за 1 шт'>
-                                        <?= $form->field($stoneModel, "[$index]setting_cost")->textInput([
-                                            'class' => 'block w-full text-[14px] border border-gray-300 rounded-sm focus:ring-yellow-500 focus:border-yellow-500 '
-                                        ])->label('Стоимость закрепки за 1 шт') ?>
-                                    </div>
+                                    
 
                                 </div>
                             <?php endforeach; ?>
@@ -155,8 +165,8 @@ $this->title = 'Калькулятор стоимости изделия';
         </div>
     </div>
 
-    <div class="flex justify-center items-center leading-7 w-[36px] h-[36px] bg-green-500 text-white rounded-md">
-        <button id="add-new-page" class="w-full h-full" >+</button>
+    <div class="flex items-center justify-center leading-7 w-[36px] h-[36px] text-white bg-green-500 rounded-md">
+        <button id="add-new-page" class="w-[36px] h-[36px]" >+</button>
     </div>
 </div>
 
