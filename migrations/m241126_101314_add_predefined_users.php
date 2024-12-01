@@ -14,16 +14,14 @@ class m241126_101314_add_predefined_users extends Migration
     public function safeUp()
     {
 
-        // foreach(['admin' => '1','manager' => '1'] as $username => $password){
+        foreach(['admin' => '1','manager' => '1'] as $username => $password){
             $user = new UserRecord();
-            $username = 'admin';
-            $password = '1';
             $user->username = $username;
             $user->password = $password;
             $user->name = "Фамилия Имя";
             $user->save();
             
-        // }
+        }
     }
 
     /**

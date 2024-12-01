@@ -37,7 +37,7 @@
         fio: '',phone: '',product_type: '',calculation_date: '<?= date('Y-m-d') ?>', manager:<?= $currentUserId ?? 0 ?>
     }" 
     class="flex gap-4">
-    <div class="flex-1 p-4 mb-4 bg-[#96add4]  rounded-t-lg text-[#172554]">
+    <div class="flex-1 p-4 mb-4 bg-[#96add4] text-[#172554]">
         <h2 class="mb-1 font-semibold text-[#172554] text-md">ДАННЫЕ КЛИЕНТА</h2>
         <?= $form->field($clientModel, 'fio')->textInput([ 
             'maxlength' => true, 
