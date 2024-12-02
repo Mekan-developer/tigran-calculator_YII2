@@ -1,6 +1,5 @@
 <?php
 
-
 use yii\db\Query;
 use app\models\user\UserRecord;
 use yii\helpers\Html;
@@ -15,116 +14,100 @@ use yii\grid\GridView;
 $this->title = 'Записи о менеджерах';  // "User Records"
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-record-index container py-4">
+<div class="user-record-index container py-6 mx-auto">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h3"> <?= Html::encode($this->title) ?> </h1>
-   <?php
-        echo Html::a('Создать запись пользователя', ['create'], ['class' => 'btn btn-success btn-sm']);
-
-    ?>
-          
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-3xl font-semibold text-gray-800"><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('Создать запись пользователя', ['create'], ['class' => 'btn bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm']) ?>
     </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <div class="table-responsive">
+    <div class="overflow-x-auto mt-6">
         <?= GridView::widget([
-               'summary' => '',
             'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
-            'tableOptions' => ['class' => 'table table-striped table-bordered table-hover align-middle'], // Классы таблицы Bootstrap 5
+            'tableOptions' => ['class' => 'min-w-full bg-white border border-gray-200 shadow-sm rounded-lg'],
             'columns' => [
                 [
-                    'class' => 'yii\grid\SerialColumn', // Используется для серийных номеров, без 'attribute'
-                    'headerOptions' => ['class' => 'text-center'],
+                    'class' => 'yii\grid\SerialColumn',
+                    'header' => '№',
+                    'headerOptions' => [
+                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
+                    ],
                     'contentOptions' => [
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
                 ],
 
                 [
-                    'class' => 'yii\grid\DataColumn', // Отображение имени пользователя в обычной колонке данных
-                    'attribute' => 'name', // Атрибут
-                    'headerOptions' => ['class' => 'text-center'],
+                    'attribute' => 'name',
+                    'headerOptions' => [
+                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
+                    ],
                     'contentOptions' => [
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
-                ],  
-                
+                ],
+
                 [
-                    'class' => 'yii\grid\DataColumn', // Отображение имени пользователя в обычной колонке данных
-                    'attribute' => 'username', // Атрибут
-                    'headerOptions' => ['class' => 'text-center'],
+                    'class' => 'yii\grid\DataColumn', // Display username
+                    'attribute' => 'username',
+                    'headerOptions' => [
+                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
+                    ],
                     'contentOptions' => [
                         'class' => 'px-4 py-2 text-center text-gray-800'
                     ],
-                ],  
-                
+                ],
 
                 [
                     'class' => ActionColumn::className(),
-                    'header' => 'Действия',  // "Actions"
-                    'headerOptions' => ['class' => 'text-center'],
-                    'contentOptions' => ['class' => 'text-center'], // Центрирование кнопок действий
-                    'template' => ' {update} {delete}', // Это гарантирует, что будет отображен значок удаления
+                    'header' => 'Действия', // "Actions"
+                    'headerOptions' => [
+                        'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
+                    ],
+                    'contentOptions' => [
+                        'class' => 'px-4 py-2 text-center text-gray-800'
+                    ],
+                    'template' => '{update} {delete}',
                     'urlCreator' => function ($action, UserRecord $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     },
                     'buttons' => [
-                        // 'view' => function ($url, $model, $key) {
-                        //     return Html::a('<i class="bi bi-eye"></i>', $url, [
-                        //         'class' => 'btn btn-primary btn-sm',
-                        //         'title' => 'Просмотр', // "View"
-                        //         'aria-label' => 'Просмотр', // "View"
-                        //     ]);
-                        // },
                         'update' => function ($url, $model, $key) {
                             return Html::a('<i class="bi bi-pencil"></i>', $url, [
-                                'class' => 'btn btn-warning btn-sm',
+                                'class' => 'btn bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 text-sm',
                                 'title' => 'Обновить', // "Update"
                                 'aria-label' => 'Обновить', // "Update"
                             ]);
                         },
                         'delete' => function ($url, $model, $key) {
                             return Html::a('<i class="bi bi-trash"></i>', $url, [
-                                'class' => 'btn btn-danger btn-sm',
+                                'class' => 'btn bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-sm',
                                 'title' => 'Удалить', // "Delete"
                                 'aria-label' => 'Удалить', // "Delete"
-                                'data-confirm' => 'Вы уверены, что хотите удалить этот элемент?', // "Are you sure you want to delete this item?"
+                                'data-confirm' => 'Вы уверены, что хотите удалить этот элемент?',
                                 'data-method' => 'post',
                             ]);
                         },
-                    ]
-
+                    ],
                 ],
             ],
+            'rowOptions' => function ($model, $index, $widget, $grid) {
+                // Hide a specific row based on a condition
+                $authAssignments = (new Query())
+                    ->select(['user_id', 'item_name', 'created_at'])
+                    ->from('auth_assignment')
+                    ->where(['item_name' => 'admin'])
+                    ->one();
 
-            // Modify rowOptions here to hide specific rows
-        'rowOptions' => function ($model, $index, $widget, $grid) {
-            // Hide a specific row based on the username or other condition
-            
+                if ($authAssignments['user_id'] == $model->id) {
+                    return ['style' => 'display:none']; // Hide the row
+                }
 
-            // Query the auth_assignment table
-            $authAssignments = (new Query())
-                ->select(['user_id', 'item_name', 'created_at']) // Select specific columns
-                ->from('auth_assignment') // Table name
-                ->where(['item_name' => 'admin'])->one();
-
-                // debug($authAssignments['user_id']);die();
-            if ($authAssignments['user_id'] == $model->id) {
-                // To completely hide the row, return an empty array
-                return ['style' => 'display:none']; // Hides the row
-            }
-
-            // Optionally add additional conditions, for example:
-            // if ($model->role == 'guest') {
-            //     return ['style' => 'display:none']; // Hides rows with 'guest' role
-            // }
-
-            return []; // No special styling, keep row visible
-        },
-        
+                return []; // Keep row visible
+            },
+            'summary' => '',
         ]); ?>
     </div>
 

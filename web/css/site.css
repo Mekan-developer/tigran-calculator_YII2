@@ -18,6 +18,19 @@ main > .container {
     font-style: italic;
 }
 
+.help-block {
+    color: #ff0000b2; /* Change text color to red */
+    font-weight: normal; /* Make the text bold */
+    font-size: 14px; /* Adjust font size */
+    padding:0;margin:0;
+}
+
+.has-error .form-control {
+    border-color: #ff0000; /* Highlight the input field with red border */
+    background-color: #ffe6e6; /* Add a light red background */
+    padding:0;margin:0;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     content: '';

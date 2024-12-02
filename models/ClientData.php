@@ -1,6 +1,8 @@
 <?php
 
 namespace app\models;
+use app\models\User;
+
 
 use Yii;
 
@@ -12,7 +14,7 @@ use Yii;
  * @property string $phone Телефон
  * @property string $product_type Тип изделия
  * @property string $calculation_date Дата расчёта
- * @property string $manager Менеджер
+ * @property string $user_id Менеджер
  *
  * @property MetalCalculation[] $metalCalculations
  * @property StoneCalculation[] $stoneCalculations
@@ -31,14 +33,37 @@ class ClientData extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+
+     public function rules()
     {
+        // return [
+        //     [['fio', 'phone', 'product_type', 'calculation_date', 'user_id'], 'required'],
+        //     [['calculation_date'], 'safe'],
+        //     [['fio', 'phone', 'product_type'], 'string', 'max' => 255],
+        //     [['user_id'], 'integer'],
+        //     [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+        // ];
+
         return [
-            [['fio', 'phone', 'product_type', 'calculation_date', 'manager'], 'required'],
-            [['calculation_date'], 'safe'],
-            [['fio', 'phone', 'product_type', 'manager'], 'string', 'max' => 255],
+            [['fio', 'phone', 'product_type', 'calculation_date', 'user_id'], 'required'], // Fields that cannot be empty
+            [['calculation_date'], 'safe'], // Validates the date, can be safely inserted
+            [['fio', 'phone', 'product_type'], 'string', 'max' => 255], // Maximum length for string fields
+            [['user_id'], 'integer'], // Ensures user_id is an integer
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']], // Ensures that user_id exists in the User table
         ];
     }
+
+
+    // public function rules()
+    // {
+    //     return [
+    //         [['fio', 'phone', 'product_type', 'calculation_date', 'user_id'], 'required'],
+    //         [['calculation_date'], 'safe'],
+    //         [['fio', 'phone', 'product_type'], 'string', 'max' => 255],
+    //         [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+    //     ];
+        
+    // }
 
     /**
      * {@inheritdoc}
@@ -51,7 +76,7 @@ class ClientData extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'product_type' => 'Product Type',
             'calculation_date' => 'Calculation Date',
-            'manager' => 'Manager',
+            'user_id' => 'Manager',
         ];
     }
 
@@ -83,5 +108,14 @@ class ClientData extends \yii\db\ActiveRecord
     public function getWorkCalculations()
     {
         return $this->hasMany(WorkCalculation::class, ['client_id' => 'id']);
+    }
+
+    public function getClient()
+    {
+        return $this->hasOne(ClientData::class, ['id' => 'client_id']);
+    }
+    public function getManagers()
+    {
+        return $this->hasMany(User::class, ['user_id' => 'id']);
     }
 }

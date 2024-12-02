@@ -1,8 +1,10 @@
 <?php
 
+use app\models\CurrencyRateSearch;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\grid\GridView;
-
+use yii\widgets\LinkPager;
 
 /** @var yii\web\View $this */
 /** @var app\models\CurrencyRateSearch $searchModel */
@@ -15,13 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="p-6 currency-rate-index bg-gray-50">
 
     <h1 class="text-xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
-    <div class="flex justify-end">
-        <p class="mt-4">
-            <?= Html::a('Создать запись', ['create'], [
-                'class' => 'inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow'
-            ]) ?>
-        </p>
-    </div>
+    <p class="mt-4">
+        <?= Html::a('Создать запись', ['create'], [
+            'class' => 'inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow'
+        ]) ?>
+    </p>
+
+    
 
     <!-- GridView -->
     <div class="mt-6 overflow-x-auto">

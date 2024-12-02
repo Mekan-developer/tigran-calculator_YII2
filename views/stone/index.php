@@ -17,9 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1 class="text-xl font-bold text-gray-800"><?= Html::encode($this->title) ?></h1>
 
-    <p class="mt-4">
-        <?= Html::a('Создать камень', ['create'], ['class' => 'inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow']) ?>
-    </p>
+    <div class="flex justify-end">
+        <p class="mt-4">
+            <?= Html::a('Создать камень', ['create'], ['class' => 'inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded shadow']) ?>
+        </p>
+    </div>
 
     <div class="overflow-x-auto mt-6">
         <?= GridView::widget([

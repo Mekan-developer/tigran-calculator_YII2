@@ -20,6 +20,10 @@ use Yii;
  */
 class MetalCalculation extends \yii\db\ActiveRecord
 {
+
+    public $weight;
+    public $price_per_gram;
+
     /**
      * {@inheritdoc}
      */
@@ -28,21 +32,27 @@ class MetalCalculation extends \yii\db\ActiveRecord
         return 'metal_calculation';
     }
 
+    // public function getTotalMetalCost()
+    // {
+    //     return $this->weight * $this->price_per_gram;
+    // }
+
     public function getTotalMetalCost()
     {
-        return $this->weight * $this->price_per_gram;
+        return (float)$this->weight * (float)$this->price_per_gram;
     }
 
 
+
     /**
-     * {@inheritdoc}
+     * {@inheritdoc} 
      */
     public function rules()
     {
         return [
-            [['client_id', 'profile', 'height', 'width', 'ring_size', 'metal_id', 'rounding'], 'required'],
+            [['client_id', 'profile', 'height', 'width','gap', 'ring_size', 'metal_id', 'rounding'], 'required'],
             [['client_id','metal_id'], 'integer'],
-            [['height', 'width', 'ring_size', 'tolerance'], 'number'],
+            [['height', 'width', 'ring_size', 'Зазор','tolerance'], 'number'],
             [['profile'], 'string', 'max' => 255],
             [['rounding'], 'integer', 'min' => 0, 'max' => 100], // Ensure rounding is between 0 and 100
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientData::class, 'targetAttribute' => ['client_id' => 'id']],
@@ -56,13 +66,15 @@ class MetalCalculation extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'client_id' => 'Client ID',
-            'profile' => 'Profile',
-            'height' => 'Height',
-            'width' => 'Width',
-            'ring_size' => 'Ring Size',
-            'metal' => 'Metal',
-            'tolerance' => 'Tolerance',
+            'client_id' => 'ID клиента',
+            'profile' => 'Профиль',
+            'height' => 'Высота',
+            'width' => 'Ширина',
+            'gap' => 'Зазор между камнями',
+            'ring_size' => 'Размер кольца',
+            'metal' => 'Металл',
+            'rounding' => 'Скругление',
+            'tolerance' => 'Допуск',
         ];
     }
 
@@ -80,4 +92,5 @@ class MetalCalculation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Metal::class, ['id' => 'metal_id']);
     }
+    
 }

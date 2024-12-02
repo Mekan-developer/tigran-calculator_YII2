@@ -15,6 +15,7 @@ class m241115_054355_create_metal_calculation_table extends Migration
             'profile' => $this->string()->notNull()->comment('Профиль'),
             'height' => $this->decimal(10, 2)->notNull()->comment('Высота'),
             'width' => $this->decimal(10, 2)->notNull()->comment('Ширина'),
+            'gap' => $this->decimal(10, 2)->notNull()->comment('Зазор'),
             'ring_size' => $this->decimal(10, 2)->notNull()->comment('Размер кольца'),
             'metal_id' => $this->integer()->notNull()->comment('Металл'), // Changed from string to integer
             'rounding' =>$this->integer()->notNull()->comment('Скругление'),

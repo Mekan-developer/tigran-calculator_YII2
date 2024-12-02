@@ -1,5 +1,5 @@
 <template x-for="(_, index_no) in itemsMetal" :key="index_no">
-    <div x-data="stoneFields(index_no)" class="p-4 mb-4 bg-[#96add4] text-white rounded-sm flex-1">
+    <div x-data="stoneFields(index_no)" class="p-4 mb-4 bg-[#96add4] text-[#172554] rounded-sm flex-1">
         <h2 class="mb-1 font-semibold text-md">КАМНИ</h2>
         <div id="stone-fields-container">
             <!-- Initial fields -->
@@ -12,7 +12,7 @@
                                 <button type="button" x-show="index == 0" @click="addField()" class="w-[34px] aspect-square text-white bg-[#2a5298] rounded-sm hover:bg-[#3a67b4]">
                                     +
                                 </button>
-                                <button type="button" x-show="index != 0" @click="removeField(index)" class="w-[34px] aspect-square text-white bg-[#2a5298] rounded-sm hover:bg-[#3a67b4]">
+                                <button type="button" x-show="index != 0" @click="removeField(index)" class="w-[34px] aspect-square text-white bg-red-600 rounded-sm hover:bg-red-700">
                                     -
                                 </button>
                             </div>
@@ -44,6 +44,22 @@
                     </div>
                 </div>
             </template>
+            <!-- ИТОГО -->
+            <div class="p-4 mb-4 bg-[#2a5298] text-white rounded-sm">
+                <div class="flex flex-row gap-2">
+                    <span>Итого камней:</span><span>100</span>
+                </div>
+                <div class="flex flex-row gap-2">
+                    <span>Курс:</span><span>100</span>
+                </div>
+                <div class="flex flex-row gap-2">
+                    <span>Итого стоимость камней:</span><span>100</span>
+                </div>
+                <div class="flex flex-row gap-2">
+                    <span>Итого стоимость закрепки:</span><span>100</span>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>

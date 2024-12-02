@@ -54,12 +54,14 @@ class CalculatorController extends AppController
     public function actionIndex()
     {
         $clientModel = new ClientData();
+
         $metalModel = [new MetalCalculation()];
         $stoneModels = [new StoneCalculation()]; // Initialize with one empty model
         $workModels = [new WorkCalculation()];
        
         if ($clientModel->load(Yii::$app->request->post()) && $clientModel->validate()) {
             $transaction = Yii::$app->db->beginTransaction(); // Start transaction
+  
             try {
                 $ClientSize = Yii::$app->request->post('ClientSize');
                 $ClientSize = json_decode($ClientSize, true);

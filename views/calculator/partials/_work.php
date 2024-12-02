@@ -1,13 +1,13 @@
 <template x-for="(item, index_no) in itemsMetal" :key="index_no">
     <div class="w-full">
-        <div x-data="workFields(index_no)" class="p-4 mb-4 bg-[#96add4] text-white rounded-sm flex-1">
+        <div x-data="workFields(index_no)" class="p-4 mb-4 bg-[#96add4] text-[#172554] rounded-sm flex-1">
             <h2 class="mb-1 font-semibold text-md">РАБОТЫ</h2>
             <div id="work-fields-container">
                 <!-- Render the initial fields -->
                 <template x-for="(field, index) in fields" :key="index">
                     <div class="flex items-center mb-3 gap-4 work-field">
                         <!-- Remove button (visible for all fields except the first one) -->
-                        <button x-show="index != 0" type="button" @click="removeField(index)" class="w-[34px] aspect-square text-white bg-[#2a5298] rounded-sm hover:bg-[#3e6bb9]">
+                        <button x-show="index != 0" type="button" @click="removeField(index)" class="w-[34px] aspect-square text-white bg-red-600 rounded-sm hover:bg-red-700">
                             -
                         </button>
                         <!-- Add button (visible for the first field) -->
@@ -28,11 +28,17 @@
                         </div>
                     </div>
                 </template>
+                <!-- ИТОГО -->
+                <div class="p-4 mb-4 bg-[#2a5298] text-white rounded-sm">
+                    <div class="flex flex-row gap-2">
+                        <span>Итого стоимость работ:</span><span>100</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- ИТОГО -->
-        <div class="p-4 mb-4 bg-[#2a5298] rounded-sm">
+        <div class="p-4 mb-4 bg-green-600 rounded-sm">
             <h2 class="text-lg font-bold text-white">Итого стоимость изделия</h2>
             <p class="mt-2 text-lg font-semibold text-white">Итого: <span id="total-cost" class="text-xl font-bold">0</span> руб.</p>
         </div>

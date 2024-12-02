@@ -31,8 +31,8 @@ class AppAsset extends AssetBundle
         'js/alpine.js'
     ];
     public $depends = [
+        // 'yii\bootstrap5\BootstrapAsset',
         '\rmrevin\yii\fontawesome\AssetBundle',
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset'
     ];
 }

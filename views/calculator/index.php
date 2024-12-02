@@ -27,9 +27,7 @@
             tolerance: firstItem.tolerance
         });
     },
-    removeItem(index) {this.itemsMetal.splice(index, 1); this.num--;}
-
-
+    removeItem(index) {this.itemsMetal.splice(index, 1); this.num--;},
 }"
 
 class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container mt-4">
@@ -39,7 +37,7 @@ class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container mt
         <div class="flex flex-col gap-4 ">
             
             <div x-data="{ itemsDiv: [] }" class="flex gap-4 ">
-            <input type="hidden" name="ClientSize" :value="JSON.stringify(itemsDiv)" >
+                <input type="hidden" name="ClientSize" :value="JSON.stringify(itemsDiv)" >
                 <div class="flex-1">
                     <!-- ДАННЫЕ КЛИЕНТА -->
                     <?php include('partials/_client.php'); ?>
@@ -69,12 +67,15 @@ class="flex flex-row justify-around flex-1 gap-4" id="dynamic-pages-container mt
                     +
                 </div>
             </div>
-            <div class="mt-4 form-group">
-                <?= Html::submitButton('Сохранить все данные', ['class' => 'px-6 py-2 bg-green-600 text-white rounded-sm hover:bg-green-700 transition']) ?>
+            <div class="flex justify-end mr-[52px]">
+                <div class="mt-4 form-group">
+                    <?= Html::submitButton('Сохранить все данные', ['class' => 'px-6 py-2 bg-green-600 text-white rounded-sm hover:bg-green-700 transition']) ?>
+                </div>
             </div>
         </div>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+
 
 

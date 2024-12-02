@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 
                 [
-                    'attribute' => 'manager', // This is the manager ID field in your model
+                    'attribute' => 'user_id', // This should be 'user_id', not 'manager'
                     'label' => 'Менеджер', // Label to show in the header
                     'headerOptions' => [
                         'class' => 'bg-gray-100 px-4 py-2 text-center text-sm font-medium text-gray-600'
@@ -100,13 +100,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'value' => function ($model) {
                         // Manually query the User table to get the manager's name
-                        $manager = Yii::$app->db->createCommand('SELECT `name` FROM user WHERE id = :id')
-                            ->bindValue(':id', $model->manager)  // Bind the manager ID
+                        $manager = Yii::$app->db->createCommand('SELECT `name` FROM {{%user}} WHERE id = :id')
+                            ->bindValue(':id', $model->user_id)  // Bind the correct user_id attribute
                             ->queryScalar(); // Fetch the username as a single value
                         
                         return $manager ? $manager : 'Не назначен'; // Return the manager's username or 'Не назначен' if not found
                     }
                 ],
+                
 
                 [
                     'class' => ActionColumn::className(),
